@@ -1,0 +1,20 @@
+{
+  "name": "@rocketopp/0nmcp",
+  "version": "1.0.0",
+  "description": "Rocket CRM Automation MCP Server — deploy pipelines, tags, workflows, and full snapshots via AI agents.",
+  "main": "index.js",
+  "bin": {
+    "0nmcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "keywords": ["mcp", "crm", "automation", "rocket", "pipeline", "workflows"],
+  "author": "RocketOpp",
+  "license": "UNLICENSED",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.26.0"
+  }
+}
