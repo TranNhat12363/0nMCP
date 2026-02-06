@@ -1,45 +1,83 @@
 {
   "name": "0nmcp",
   "version": "1.0.0",
-  "description": "Universal AI-powered API orchestrator for MCP. Connect services, describe tasks, AI handles the rest.",
+  "description": "Universal AI API Orchestrator - Connect 17+ services, orchestrate with natural language. The official MCP server from 0nORK.",
+  "type": "module",
   "main": "index.js",
+  "types": "types/index.d.ts",
   "bin": {
-    "0nmcp": "./index.js"
+    "0nmcp": "./cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./index.js"
+    },
+    "./connections": {
+      "import": "./connections.js"
+    },
+    "./catalog": {
+      "import": "./catalog.js"
+    },
+    "./crm": {
+      "import": "./crm.js"
+    },
+    "./webhooks": {
+      "import": "./webhooks.js"
+    },
+    "./ratelimit": {
+      "import": "./ratelimit.js"
+    },
+    "./orchestrator": {
+      "import": "./orchestrator.js"
+    }
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "node --test"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "mcp",
     "model-context-protocol",
-    "orchestrator",
     "ai",
+    "orchestration",
     "automation",
     "api",
-    "claude",
-    "anthropic",
     "stripe",
-    "sendgrid",
-    "twilio",
     "slack",
+    "discord",
+    "openai",
+    "anthropic",
+    "twilio",
+    "sendgrid",
     "airtable",
     "notion",
     "github",
+    "hubspot",
     "shopify",
+    "supabase",
     "crm",
-    "open-source"
+    "0n",
+    "0nork",
+    "0nmcp"
   ],
-  "author": "RocketOpp",
+  "author": {
+    "name": "0nORK",
+    "email": "hello@0nork.com",
+    "url": "https://0nork.com"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/0nork/0nMCP"
+    "url": "git+https://github.com/0nork/0nMCP.git"
   },
-  "homepage": "https://github.com/0nork/0nMCP",
   "bugs": {
     "url": "https://github.com/0nork/0nMCP/issues"
   },
-  "type": "module",
+  "homepage": "https://0nmcp.com",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -51,10 +89,14 @@
   },
   "files": [
     "index.js",
+    "cli.js",
     "catalog.js",
     "connections.js",
     "orchestrator.js",
     "crm.js",
+    "webhooks.js",
+    "ratelimit.js",
+    "types/",
     "README.md",
     "LICENSE"
   ]
