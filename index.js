@@ -26,7 +26,7 @@ import { z } from "zod";
 import { SERVICE_CATALOG, listServices, getService } from "./catalog.js";
 import { ConnectionManager } from "./connections.js";
 import { Orchestrator } from "./orchestrator.js";
-import { registerCrmTools } from "./crm.js";
+import { registerCrmTools } from "./crm/index.js";
 
 // ── Initialize ─────────────────────────────────────────────
 const connections = new ConnectionManager();
@@ -34,7 +34,7 @@ const orchestrator = new Orchestrator(connections);
 
 const server = new McpServer({
   name: "0nMCP",
-  version: "1.0.0",
+  version: "1.1.0",
 });
 
 // ============================================================

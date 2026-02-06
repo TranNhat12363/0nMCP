@@ -1,6 +1,6 @@
 {
   "name": "0nmcp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Universal AI API Orchestrator - Connect 17+ services, orchestrate with natural language. The official MCP server from 0nORK.",
   "type": "module",
   "main": "index.js",
@@ -20,7 +20,7 @@
       "import": "./catalog.js"
     },
     "./crm": {
-      "import": "./crm.js"
+      "import": "./crm/index.js"
     },
     "./webhooks": {
       "import": "./webhooks.js"
@@ -94,6 +94,7 @@
     "connections.js",
     "orchestrator.js",
     "crm.js",
+    "crm/",
     "webhooks.js",
     "ratelimit.js",
     "types/",
