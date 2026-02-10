@@ -11,7 +11,7 @@
 //   crm/index.js     — This file (wires everything together)
 // ============================================================
 
-import { registerTools } from "./helpers.js";
+import { registerTools, crmHeaders, CRM_API_BASE, API_VERSION } from "./helpers.js";
 import { registerAuthTools } from "./auth.js";
 
 // Category modules — each exports a default array of tool definitions
@@ -26,6 +26,25 @@ import locations from "./locations.js";
 import social from "./social.js";
 import users from "./users.js";
 import objects from "./objects.js";
+
+// Re-export definitions + helpers for external consumers (e.g. CRM bridges)
+export {
+  contacts,
+  conversations,
+  calendars,
+  opportunities,
+  invoices,
+  payments,
+  products,
+  locations,
+  social,
+  users,
+  objects,
+  crmHeaders,
+  CRM_API_BASE,
+  API_VERSION,
+  registerTools,
+};
 
 /**
  * Register ALL CRM tools on the MCP server.
