@@ -2,31 +2,31 @@
   "tools": {
     "schemaVersion": 1,
     "label": "tools",
-    "message": "180",
+    "message": "290",
     "color": "00ff88"
   },
   "services": {
     "schemaVersion": 1,
     "label": "services",
-    "message": "17",
+    "message": "26",
     "color": "00d4ff"
   },
   "actions": {
     "schemaVersion": 1,
     "label": "actions",
-    "message": "39",
+    "message": "65",
     "color": "ff6b35"
   },
   "triggers": {
     "schemaVersion": 1,
     "label": "triggers",
-    "message": "58",
+    "message": "93",
     "color": "9945ff"
   },
   "total": {
     "schemaVersion": 1,
     "label": "capabilities",
-    "message": "277",
+    "message": "448",
     "color": "00ff88"
   }
 }
