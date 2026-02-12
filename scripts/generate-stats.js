@@ -101,8 +101,12 @@ for (const svc of services) {
   stats.allServiceIds.push(svc.id);
 }
 
-// Total capabilities = tools + actions + triggers
-stats.totalCapabilities = stats.tools + stats.actions + stats.triggers;
+// CRM module tools (registered separately via registerCrmTools, not in catalog.json)
+stats.crmTools = 245;
+stats.totalTools = stats.tools + stats.crmTools;
+
+// Total capabilities = tools + CRM tools + actions + triggers
+stats.totalCapabilities = stats.totalTools + stats.actions + stats.triggers;
 
 // ── Parse CLI flags ─────────────────────────────────────────
 const args = process.argv.slice(2);
@@ -161,11 +165,13 @@ if (doPatch) {
   const pkgPath = resolve(ROOT, 'package.json');
   if (existsSync(pkgPath)) {
     const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
-    pkg.description = `Universal AI API Orchestrator — ${stats.tools} tools, ${stats.services} services, natural language interface. The most comprehensive MCP server available. Free and open source from 0nORK.`;
-    
+    pkg.description = `Universal AI API Orchestrator — ${stats.totalTools} tools, ${stats.services} services, natural language interface. The most comprehensive MCP server available. Free and open source from 0nORK.`;
+
     // Also update a custom stats field in package.json
     pkg['0nmcp-stats'] = {
       tools: stats.tools,
+      crmTools: stats.crmTools,
+      totalTools: stats.totalTools,
       services: stats.services,
       actions: stats.actions,
       triggers: stats.triggers,
@@ -211,13 +217,15 @@ if (doReadme) {
 
 // ── Summary ─────────────────────────────────────────────────
 console.log('\n📊 0nMCP Catalog Summary:');
-console.log(`   Services:  ${stats.services}`);
-console.log(`   Tools:     ${stats.tools}`);
-console.log(`   Actions:   ${stats.actions}`);
-console.log(`   Triggers:  ${stats.triggers}`);
+console.log(`   Services:     ${stats.services}`);
+console.log(`   Catalog Tools:${String(stats.tools).padStart(4)}`);
+console.log(`   CRM Tools:   ${stats.crmTools}`);
+console.log(`   Total Tools:  ${stats.totalTools}`);
+console.log(`   Actions:     ${stats.actions}`);
+console.log(`   Triggers:    ${stats.triggers}`);
 console.log(`   ─────────────────`);
-console.log(`   Total:     ${stats.totalCapabilities} capabilities`);
-console.log(`   Categories: ${stats.categories}`);
+console.log(`   Total:        ${stats.totalCapabilities} capabilities`);
+console.log(`   Categories:   ${stats.categories}`);
 console.log('');
 
 // Per-category table
