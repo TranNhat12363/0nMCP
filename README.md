@@ -19,20 +19,20 @@
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen?style=flat-square)](https://nodejs.org)
 [![MCP](https://img.shields.io/badge/MCP-Compatible-blueviolet?style=flat-square)](https://modelcontextprotocol.io)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Services](https://img.shields.io/badge/services-17+-blue?style=flat-square)](#-supported-services)
-[![Tools](https://img.shields.io/badge/tools-252-orange?style=flat-square)](#-all-tools)
+[![Services](https://img.shields.io/badge/services-26+-blue?style=flat-square)](#-supported-services)
+[![Tools](https://img.shields.io/badge/tools-535-orange?style=flat-square)](#-all-tools)
 [![Community](https://img.shields.io/badge/community-1000%2B_devs-ff6600?style=flat-square)](#-community)
 [![GitHub Discussions](https://img.shields.io/github/discussions/0nork/0nMCP?style=flat-square&label=discussions)](https://github.com/0nork/0nMCP/discussions)
 
-**252 tools. 17 services. Zero configuration. One natural language interface.**
+**535 tools. 26 services. Zero configuration. One natural language interface.**
 
-[Quick Start](#-installation) · [Services](#-supported-services) · [252 Tools](#-all-tools) · [.0n Standard](#-the-0n-standard) · [Community](#-community) · [Contributing](#-contributing)
+[Quick Start](#-installation) · [Services](#-supported-services) · [535 Tools](#-all-tools) · [.0n Standard](#-the-0n-standard) · [Unlocks](#-unlocks) · [Community](#-community) · [Contributing](#-contributing)
 
 </div>
 
 ---
 
-> **v1.2.0** — 245 CRM tools across 12 modules, full API coverage, rate limiting, webhooks, TypeScript definitions, and a growing open source community. [See what's new](#-whats-new-in-v12).
+> **v1.3.0** — 535 tools across 26 services in 13 categories. Gmail, Google Sheets, Google Drive, Jira, Zendesk, Mailchimp, Zoom, Microsoft 365, and MongoDB now live. Full CRM coverage (245 tools), rate limiting, webhooks, TypeScript definitions, and a growing open source community. [See what's new](#-whats-new-in-v13).
 
 ---
 
@@ -146,11 +146,20 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (Mac) o
 | **Supabase** | Database | Tables, auth users, storage buckets |
 | **Calendly** | Scheduling | Events, event types, availability |
 | **Google Calendar** | Scheduling | Events, calendars, CRUD |
+| **Gmail** | Email | Send, read, search emails, manage labels, drafts, threads, attachments |
+| **Google Sheets** | Database | Read/write spreadsheets, create sheets, append rows, batch operations |
+| **Google Drive** | Storage | Upload, download, search, share files, manage folders, permissions |
+| **Jira** | Dev Tools | Issues, projects, sprints, boards, transitions, comments, assignments |
+| **Zendesk** | Support | Tickets, users, organizations, comments, tags, views, search |
+| **Mailchimp** | Marketing | Campaigns, lists, members, templates, automations, reports |
+| **Zoom** | Communication | Meetings, webinars, recordings, users, registrants |
+| **Microsoft 365** | Productivity | Outlook mail, Teams messages, OneDrive files, calendar events |
+| **MongoDB** | Database | Find, insert, update, delete, aggregate documents via Atlas Data API |
 | **CRM** | CRM | **245 tools** — contacts, conversations, calendars, invoices, payments, products, pipelines, social media, custom objects, and more |
 
-**17 services. 252 tools. One interface.**
+**26 services. 535 tools. 13 categories. One interface.**
 
-> **More coming:** Mailchimp, QuickBooks, Jira, Asana, Zendesk, Intercom, Webflow, WordPress...
+> **More coming:** QuickBooks, Asana, Intercom, AWS S3, Vercel, Cloudflare, Firebase, Figma...
 
 ---
 
@@ -175,9 +184,9 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (Mac) o
 ### Multi-Step
 
 ```
-"Create a Stripe invoice for $1000, then email the link to john@client.com"
+"Create a Stripe invoice for $1000, then email the link via Gmail to john@client.com"
 
-"Create a GitHub issue for the login bug, then post it to #bugs on Slack"
+"Create a Jira issue for the login bug, then post it to #bugs on Slack"
 
 "Look up sarah@example.com in my CRM and send her a follow-up email"
 ```
@@ -235,7 +244,7 @@ One tool call. Everything deployed:
 | `connect_service` | Connect a new service with credentials |
 | `disconnect_service` | Remove a connected service |
 | `list_connections` | See what's connected and capability counts |
-| `list_available_services` | Browse all 17 services grouped by category |
+| `list_available_services` | Browse all 26 services grouped by category |
 | `get_service_info` | Deep dive on a specific service — endpoints, auth, capabilities |
 | `api_call` | Direct API call to any connected service endpoint |
 
@@ -258,15 +267,19 @@ The deepest CRM integration available in any MCP server. 245 tools across 12 mod
 | **Users** | 24 | Users, forms, surveys, funnels, media, companies, businesses |
 | **Objects** | 34 | Custom objects, associations, email, workflows, snapshots, links, campaigns, courses, SaaS |
 
-**252 total tools.** Universal orchestration + the most comprehensive CRM integration in the MCP ecosystem.
+**535 total tools.** Universal orchestration (290 catalog tools across 26 services) + the most comprehensive CRM integration in the MCP ecosystem (245 dedicated tools).
 
 > Every CRM tool is data-driven — defined as configuration, not code. Adding new endpoints takes minutes, not hours. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
-## What's New in v1.2
+## What's New in v1.3
 
-- **245 CRM tools** — up from 10. Full API coverage across 12 modules
+- **26 services, 535 tools** — up from 17 services and 252 tools
+- **9 new integrations** — Gmail, Google Sheets, Google Drive, Jira, Zendesk, Mailchimp, Zoom, Microsoft 365, MongoDB
+- **13 categories** — added Storage, Support, and Marketing categories
+- **Three-Level Execution Hierarchy** (Patent Pending) — Pipeline → Assembly Line → Radial Burst
+- **245 CRM tools** — full API coverage across 12 modules
 - **Data-driven tool factory** — every tool is a config object, new endpoints in minutes
 - **Rate limiting** — built-in per-service rate limits with automatic retry
 - **Webhook support** — receive and process external events
@@ -285,7 +298,7 @@ The deepest CRM integration available in any MCP server. 245 tools across 12 mod
 │  for $500 and   │     │ 2. Plan steps    │     │ SendGrid        │
 │  notify #sales" │     │ 3. Execute APIs  │     │ Slack           │
 │                 │◀────│ 4. Chain data    │◀────│ CRM             │
-│                 │     │ 5. Summarize     │     │ + 13 more...    │
+│                 │     │ 5. Summarize     │     │ + 22 more...    │
 └─────────────────┘     └──────────────────┘     └─────────────────┘
 ```
 
@@ -310,7 +323,7 @@ The orchestrator uses keyword matching to route tasks to the right service. Less
 | **Flexibility** | Say what you want | Triggers/actions only | Unlimited but complex |
 | **Maintenance** | Zero | Update broken zaps | Fix API changes |
 | **Open source** | Yes (MIT) | No | Depends |
-| **Tools available** | 252 | Varies | Whatever you build |
+| **Tools available** | 535 | Varies | Whatever you build |
 
 ---
 
@@ -362,7 +375,7 @@ Every task execution is logged to `~/.0n/history/` as JSONL — full audit trail
 ```
 0nMCP/
 ├── index.js          # Entry point — 7 universal tools + server startup
-├── catalog.js        # Service catalog — 17 integrations with endpoints
+├── catalog.js        # Service catalog — 26 integrations with endpoints
 ├── connections.js    # Connection manager — ~/.0n/connections/*.0n
 ├── orchestrator.js   # AI execution planner — the brain
 ├── webhooks.js       # Webhook receiver and event processing
@@ -392,7 +405,7 @@ Every task execution is logged to `~/.0n/history/` as JSONL — full audit trail
 
 | Component | What It Does |
 |-----------|-------------|
-| **Service Catalog** | Defines all 17 services — their base URLs, endpoints, auth patterns, and capabilities |
+| **Service Catalog** | Defines all 26 services — their base URLs, endpoints, auth patterns, and capabilities |
 | **Connection Manager** | Stores credentials as `.0n` files in `~/.0n/connections/` per the .0n standard |
 | **Orchestrator** | The brain — parses natural language, plans multi-step execution, calls APIs, chains data |
 | **CRM Modules** | 245 tools across 12 modules — data-driven, every tool is config not code |
@@ -484,35 +497,71 @@ The tool factory handles registration, validation, API calls, error handling —
 
 ---
 
-## Roadmap
+## Unlocks
 
-**Shipped:**
+0nMCP grows with its community. Every milestone unlocks new capabilities — the more developers who join, the more powerful the platform becomes.
 
+**See the full unlock schedule at [0nmcp.com/sponsor](https://0nmcp.com/sponsor)**
+
+### Phase 0 — Foundation (Current)
+
+- [x] **26 services, 535 tools, 13 categories**
 - [x] Core orchestration engine with AI planning
-- [x] 17 service integrations
-- [x] Multi-step execution with data chaining
 - [x] **245 CRM tools** — full API coverage across 12 modules
+- [x] Gmail, Google Sheets, Google Drive, Jira, Zendesk, Mailchimp, Zoom, Microsoft 365, MongoDB
 - [x] Data-driven tool factory — config, not code
 - [x] Full snapshot deployment (pipeline + tags + values + workflows)
-- [x] Keyword fallback mode (works without Anthropic key)
 - [x] **.0n Standard** — universal config format (`~/.0n/`)
-- [x] **Execution history** — JSONL logs in `~/.0n/history/`
-- [x] **Rate limiting** — per-service with automatic retry
-- [x] **Webhook support** — receive external events
-- [x] **TypeScript definitions** — full type coverage
-- [x] **CLI** — interactive setup, migration, colored output
+- [x] Rate limiting, webhooks, TypeScript definitions, CLI
 - [x] **npm published** — `npx 0nmcp` live on npm
 
-**In Progress:**
+### Phase 1 — Essential Expansion (100 stars / $500 MRR)
 
-- [ ] **OAuth flows** — connect with one click (Q1 2026)
-- [ ] **Credential encryption** — AES-256-GCM at-rest (Q1 2026)
+- [ ] **OAuth flows** — connect services with one click
+- [ ] **Credential encryption** — AES-256-GCM at-rest
+- [ ] **QuickBooks** — accounting and invoicing
+- [ ] **Asana** — project and task management
+- [ ] **Intercom** — customer messaging
+- [ ] Target: 30+ services, 620+ tools
+
+### Phase 2 — Full Stack (500 stars / $2K MRR)
+
+- [ ] **AWS S3** — cloud storage
+- [ ] **Vercel** — deployment management
+- [ ] **Cloudflare** — DNS, workers, security
 - [ ] **Scheduled tasks** — "every Monday, send a report"
-- [ ] **More services** — 50+ planned (Mailchimp, QuickBooks, Jira, Asana...)
+- [ ] **Conditionals** — "if balance < $100, alert me"
+- [ ] Target: 35+ services, 750+ tools
+
+### Phase 3 — Platform (1,000 stars / $5K MRR)
+
 - [ ] **Plugin system** — bring your own services
 - [ ] **Web dashboard** — manage connections visually
-- [ ] **Conditionals** — "if balance < $100, alert me"
-- [ ] **Test suite** — comprehensive unit + integration tests
+- [ ] **Workflow marketplace** — share and discover automations
+- [ ] **Firebase, Figma, WordPress, Webflow**
+- [ ] Target: 42+ services, 900+ tools
+
+### Phase 4 — Industry Packs (5,000 stars / $15K MRR)
+
+- [ ] Healthcare, Legal, Real Estate, and E-Commerce industry packs
+- [ ] **Twilio Flex, Square, Plaid, DocuSign**
+- [ ] Target: 55+ services, 1,200+ tools
+
+### Phase 5 — Ecosystem Dominance (10,000 stars / $50K MRR)
+
+- [ ] Multi-agent orchestration
+- [ ] Self-hosted enterprise edition
+- [ ] Real-time streaming execution
+- [ ] Target: 75+ services, 2,000+ tools
+
+### Phase 6 — The Singularity (25,000+ stars / $100K+ MRR)
+
+- [ ] Autonomous agent mode
+- [ ] Cross-organization federation
+- [ ] AI-generated service adapters
+- [ ] Target: 100+ services, 5,000+ tools
+
+> Every unlock is permanent. Once a milestone is hit, the feature ships for everyone — free and open source forever.
 
 ---
 
@@ -520,27 +569,28 @@ The tool factory handles registration, validation, API calls, error handling —
 
 0nMCP is built in the open by a growing network of developers who believe AI orchestration should be free, composable, and community-owned.
 
-**The 0n community is 1,000+ developers strong** — building integrations, shipping tools, and pushing the boundaries of what MCP can do.
+**The 0n community is growing fast** — building integrations, shipping tools, and pushing the boundaries of what MCP can do.
 
 ### This is not a side project. This is infrastructure.
 
 We ship weekly. The codebase is active. The community is real. If you're building with MCP, you're already one of us.
 
-### Get Involved
+### Join the Community
 
+- **[0nmcp.com/community](https://0nmcp.com/community)** — community hub with guides, events, and resources
+- **[GitHub Discussions](https://github.com/0nork/0nMCP/discussions)** — ask questions, share ideas, show off what you built
+- **[Sponsor on GitHub](https://github.com/sponsors/0nork)** — fund the next unlock and get your name on the wall
 - **Star this repo** — it helps more than you think
-- **Open an issue** — [bugs, ideas, questions](https://github.com/0nork/0nMCP/issues)
-- **Join the discussion** — [GitHub Discussions](https://github.com/0nork/0nMCP/discussions)
 - **Submit a PR** — [Contributing Guide](CONTRIBUTING.md)
 - **Learn the .0n Standard** — [0n-spec](https://github.com/0nork/0n-spec)
-- **Spread the word** — tell a developer friend
 
 ### Community Stats
 
 | Metric | |
 |--------|---|
-| **Tools shipped** | 252 |
-| **Services integrated** | 17 |
+| **Tools shipped** | 535 |
+| **Services integrated** | 26 |
+| **Categories** | 13 |
 | **CRM endpoints covered** | 245 / 245 (100%) |
 | **npm packages** | 3 ([0nmcp](https://www.npmjs.com/package/0nmcp), [0nork](https://www.npmjs.com/package/0nork), [0n-spec](https://www.npmjs.com/package/0n-spec)) |
 | **Open source repos** | 3 |
@@ -589,7 +639,7 @@ node index.js
 
 | Project | Description |
 |---------|-------------|
-| **[0nMCP](https://github.com/0nork/0nMCP)** | Universal AI API Orchestrator — 252 tools, 17 services, natural language interface |
+| **[0nMCP](https://github.com/0nork/0nMCP)** | Universal AI API Orchestrator — 535 tools, 26 services, natural language interface |
 | **[0n-spec](https://github.com/0nork/0n-spec)** | The .0n Standard — universal configuration format for AI orchestration |
 | **[0nork](https://github.com/0nork/0nork)** | The parent org — AI orchestration infrastructure |
 
@@ -604,7 +654,7 @@ node index.js
 
 <div align="center">
 
-**[Sponsor on GitHub](https://github.com/sponsors/0nork)** · **[Star the repo](https://github.com/0nork/0nMCP)** · **[Tell a friend](https://twitter.com/intent/tweet?text=0nMCP%20-%20252%20tools,%2017%20services,%20zero%20config.%20The%20universal%20AI%20API%20orchestrator.%20Free%20and%20open%20source.&url=https://github.com/0nork/0nMCP)**
+**[Sponsor on GitHub](https://github.com/sponsors/0nork)** · **[Star the repo](https://github.com/0nork/0nMCP)** · **[Tell a friend](https://twitter.com/intent/tweet?text=0nMCP%20-%20535%20tools,%2026%20services,%20zero%20config.%20The%20universal%20AI%20API%20orchestrator.%20Free%20and%20open%20source.&url=https://github.com/0nork/0nMCP)**
 
 </div>
 
@@ -614,9 +664,9 @@ node index.js
 
 ### Stop building workflows. Start describing outcomes.
 
-**252 tools. 17 services. Zero config. MIT licensed. Community driven.**
+**535 tools. 26 services. Zero config. MIT licensed. Community driven.**
 
-**[Get Started](https://github.com/0nork/0nMCP)** · **[Join the Community](https://github.com/0nork/0nMCP/discussions)** · **[Read the Docs](https://github.com/0nork/0n-spec)**
+**[Get Started](https://github.com/0nork/0nMCP)** · **[Join the Community](https://0nmcp.com/community)** · **[Unlock Schedule](https://0nmcp.com/sponsor)** · **[Read the Docs](https://github.com/0nork/0n-spec)**
 
 ---
 
