@@ -1,0 +1,63 @@
+# ═══════════════════════════════════════════════════════════════
+# 0nMCP — Auto-Update Stats on Catalog Change
+# ═══════════════════════════════════════════════════════════════
+#
+# When lib/catalog.json is modified, automatically:
+#   1. Regenerate stats.json + badges.json
+#   2. Update package.json description
+#   3. Update README.md stat markers
+#   4. Commit changes back to main
+#
+# This means: edit catalog.json → everything else updates itself
+# ═══════════════════════════════════════════════════════════════
+
+name: Update Stats
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lib/catalog.json'      # Only run when catalog changes
+
+jobs:
+  update-stats:
+    name: 📊 Sync Stats from Catalog
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate all stats
+        run: node scripts/generate-stats.js --all
+
+      - name: Commit updated stats
+        run: |
+          git config user.name "0nMCP Bot"
+          git config user.email "bot@0nmcp.com"
+          
+          git add lib/stats.json lib/badges.json package.json README.md
+          
+          # Only commit if there are changes
+          if git diff --cached --quiet; then
+            echo "No stat changes detected"
+          else
+            TOOLS=$(jq '.tools' lib/stats.json)
+            SERVICES=$(jq '.services' lib/stats.json)
+            TRIGGERS=$(jq '.triggers' lib/stats.json)
+            ACTIONS=$(jq '.actions' lib/stats.json)
+            
+            git commit -m "📊 stats: ${TOOLS} tools, ${SERVICES} services, ${ACTIONS} actions, ${TRIGGERS} triggers"
+            git push
+            
+            echo "✅ Stats committed and pushed"
+          fi

@@ -34,7 +34,7 @@ const orchestrator = new Orchestrator(connections);
 
 const server = new McpServer({
   name: "0nMCP",
-  version: "1.1.0",
+  version: "1.2.1",
 });
 
 // ============================================================

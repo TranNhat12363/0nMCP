@@ -38,10 +38,20 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "node --test"
+    "test": "node --test",
+    "stats": "node scripts/generate-stats.js --all",
+    "stats:badge": "node scripts/generate-stats.js --badge",
+    "prepublishOnly": "node scripts/generate-stats.js --all",
+    "preversion": "node scripts/generate-stats.js --all",
+    "postversion": "git push && git push --tags"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/0nork"
   },
   "keywords": [
     "mcp",

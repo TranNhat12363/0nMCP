@@ -1,0 +1,522 @@
+{
+  "$schema": "./catalog.schema.json",
+  "_meta": {
+    "name": "0nMCP Service Catalog",
+    "description": "Single source of truth for all services, tools, actions, and triggers in the 0nMCP ecosystem",
+    "version": "1.2.2",
+    "lastUpdated": "2026-02-11T00:00:00Z",
+    "maintainer": "0nORK <hello@0nork.com>"
+  },
+  "services": [
+    {
+      "id": "crm",
+      "name": "CRM",
+      "category": "crm",
+      "description": "CRM, contacts, opportunities, pipelines, workflows",
+      "tools": [
+        "crm_get_contacts",
+        "crm_create_contact",
+        "crm_update_contact",
+        "crm_delete_contact",
+        "crm_search_contacts",
+        "crm_get_opportunities",
+        "crm_create_opportunity",
+        "crm_update_opportunity",
+        "crm_get_pipelines",
+        "crm_get_calendars",
+        "crm_get_appointments",
+        "crm_create_appointment",
+        "crm_get_tasks",
+        "crm_create_task",
+        "crm_get_tags",
+        "crm_add_tag",
+        "crm_remove_tag",
+        "crm_get_conversations",
+        "crm_send_message",
+        "crm_get_workflows",
+        "crm_get_custom_values",
+        "crm_set_custom_value",
+        "crm_get_users",
+        "crm_get_locations"
+      ],
+      "actions": [
+        "crm_sync",
+        "contact_enrich",
+        "pipeline_report"
+      ],
+      "triggers": [
+        "contact_created",
+        "contact_updated",
+        "opportunity_status_changed",
+        "appointment_booked",
+        "form_submitted"
+      ],
+      "rateLimit": { "requests": 100, "window": 60 }
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "category": "payments",
+      "description": "Payments, subscriptions, invoices, customers",
+      "tools": [
+        "stripe_create_customer",
+        "stripe_get_customer",
+        "stripe_create_payment_intent",
+        "stripe_list_payments",
+        "stripe_create_invoice",
+        "stripe_send_invoice",
+        "stripe_get_balance",
+        "stripe_create_subscription",
+        "stripe_cancel_subscription",
+        "stripe_list_subscriptions",
+        "stripe_create_checkout_session",
+        "stripe_get_payment_methods",
+        "stripe_create_refund",
+        "stripe_list_invoices",
+        "stripe_create_product",
+        "stripe_create_price"
+      ],
+      "actions": [
+        "payment_report",
+        "subscription_sync",
+        "invoice_batch"
+      ],
+      "triggers": [
+        "payment_succeeded",
+        "payment_failed",
+        "subscription_created",
+        "subscription_cancelled",
+        "invoice_paid"
+      ],
+      "rateLimit": { "requests": 100, "window": 1 }
+    },
+    {
+      "id": "slack",
+      "name": "Slack",
+      "category": "communication",
+      "description": "Messaging, channels, files, users",
+      "tools": [
+        "slack_send_message",
+        "slack_list_channels",
+        "slack_create_channel",
+        "slack_upload_file",
+        "slack_get_users",
+        "slack_set_topic",
+        "slack_add_reaction",
+        "slack_search_messages",
+        "slack_get_channel_history",
+        "slack_post_thread_reply"
+      ],
+      "actions": [
+        "channel_notify",
+        "daily_digest"
+      ],
+      "triggers": [
+        "message_received",
+        "channel_created",
+        "reaction_added"
+      ],
+      "rateLimit": { "requests": 50, "window": 60 }
+    },
+    {
+      "id": "discord",
+      "name": "Discord",
+      "category": "communication",
+      "description": "Servers, channels, messages, webhooks",
+      "tools": [
+        "discord_send_message",
+        "discord_create_channel",
+        "discord_get_members",
+        "discord_send_embed",
+        "discord_create_webhook",
+        "discord_get_channels",
+        "discord_add_role",
+        "discord_remove_role",
+        "discord_ban_member",
+        "discord_get_messages"
+      ],
+      "actions": [
+        "discord_announce",
+        "role_sync"
+      ],
+      "triggers": [
+        "member_joined",
+        "message_sent"
+      ],
+      "rateLimit": { "requests": 50, "window": 60 }
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "category": "ai",
+      "description": "GPT completions, embeddings, images, speech",
+      "tools": [
+        "openai_chat_completion",
+        "openai_create_embedding",
+        "openai_generate_image",
+        "openai_text_to_speech",
+        "openai_transcribe_audio",
+        "openai_moderate_content",
+        "openai_list_models",
+        "openai_fine_tune_create",
+        "openai_batch_create",
+        "openai_file_upload"
+      ],
+      "actions": [
+        "ai_summarize",
+        "ai_classify",
+        "ai_extract"
+      ],
+      "triggers": [
+        "batch_completed",
+        "fine_tune_completed"
+      ],
+      "rateLimit": { "requests": 60, "window": 60 }
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic",
+      "category": "ai",
+      "description": "Claude completions, messages API",
+      "tools": [
+        "anthropic_create_message",
+        "anthropic_stream_message",
+        "anthropic_list_models",
+        "anthropic_count_tokens",
+        "anthropic_batch_create",
+        "anthropic_batch_results"
+      ],
+      "actions": [
+        "claude_analyze",
+        "claude_generate"
+      ],
+      "triggers": [
+        "batch_completed"
+      ],
+      "rateLimit": { "requests": 60, "window": 60 }
+    },
+    {
+      "id": "twilio",
+      "name": "Twilio",
+      "category": "communication",
+      "description": "SMS, voice calls, WhatsApp",
+      "tools": [
+        "twilio_send_sms",
+        "twilio_send_whatsapp",
+        "twilio_make_call",
+        "twilio_get_messages",
+        "twilio_get_call_logs",
+        "twilio_lookup_phone",
+        "twilio_create_verify",
+        "twilio_check_verify"
+      ],
+      "actions": [
+        "sms_blast",
+        "call_campaign"
+      ],
+      "triggers": [
+        "sms_received",
+        "call_completed",
+        "voicemail_received"
+      ],
+      "rateLimit": { "requests": 100, "window": 1 }
+    },
+    {
+      "id": "sendgrid",
+      "name": "SendGrid",
+      "category": "email",
+      "description": "Transactional email, templates, campaigns",
+      "tools": [
+        "sendgrid_send_email",
+        "sendgrid_send_template",
+        "sendgrid_create_contact",
+        "sendgrid_add_to_list",
+        "sendgrid_get_stats",
+        "sendgrid_create_template",
+        "sendgrid_validate_email",
+        "sendgrid_get_bounces"
+      ],
+      "actions": [
+        "email_campaign",
+        "bounce_cleanup"
+      ],
+      "triggers": [
+        "email_delivered",
+        "email_opened",
+        "email_bounced",
+        "email_clicked"
+      ],
+      "rateLimit": { "requests": 100, "window": 1 }
+    },
+    {
+      "id": "supabase",
+      "name": "Supabase",
+      "category": "database",
+      "description": "PostgreSQL, auth, storage, realtime",
+      "tools": [
+        "supabase_query",
+        "supabase_insert",
+        "supabase_update",
+        "supabase_delete",
+        "supabase_rpc",
+        "supabase_upload_file",
+        "supabase_get_user",
+        "supabase_create_user",
+        "supabase_list_buckets",
+        "supabase_subscribe_realtime"
+      ],
+      "actions": [
+        "db_backup",
+        "data_export"
+      ],
+      "triggers": [
+        "row_inserted",
+        "row_updated",
+        "row_deleted",
+        "auth_event"
+      ],
+      "rateLimit": { "requests": 100, "window": 1 }
+    },
+    {
+      "id": "airtable",
+      "name": "Airtable",
+      "category": "database",
+      "description": "Bases, tables, records, views",
+      "tools": [
+        "airtable_list_records",
+        "airtable_create_record",
+        "airtable_update_record",
+        "airtable_delete_record",
+        "airtable_get_record",
+        "airtable_search_records",
+        "airtable_list_bases",
+        "airtable_list_tables",
+        "airtable_create_field"
+      ],
+      "actions": [
+        "airtable_sync",
+        "record_batch"
+      ],
+      "triggers": [
+        "record_created",
+        "record_updated"
+      ],
+      "rateLimit": { "requests": 5, "window": 1 }
+    },
+    {
+      "id": "notion",
+      "name": "Notion",
+      "category": "productivity",
+      "description": "Pages, databases, blocks, search",
+      "tools": [
+        "notion_create_page",
+        "notion_update_page",
+        "notion_get_page",
+        "notion_query_database",
+        "notion_create_database",
+        "notion_add_block",
+        "notion_search",
+        "notion_get_users",
+        "notion_archive_page"
+      ],
+      "actions": [
+        "notion_sync",
+        "page_template"
+      ],
+      "triggers": [
+        "page_created",
+        "page_updated",
+        "database_item_created"
+      ],
+      "rateLimit": { "requests": 3, "window": 1 }
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "category": "devtools",
+      "description": "Repos, issues, PRs, actions, releases",
+      "tools": [
+        "github_create_issue",
+        "github_close_issue",
+        "github_create_pr",
+        "github_merge_pr",
+        "github_get_repo",
+        "github_list_repos",
+        "github_create_release",
+        "github_get_file_contents",
+        "github_commit_file",
+        "github_list_branches",
+        "github_create_branch",
+        "github_search_code",
+        "github_get_actions_runs",
+        "github_trigger_workflow"
+      ],
+      "actions": [
+        "release_notify",
+        "issue_triage"
+      ],
+      "triggers": [
+        "push_received",
+        "pr_opened",
+        "pr_merged",
+        "issue_opened",
+        "release_published",
+        "workflow_completed"
+      ],
+      "rateLimit": { "requests": 30, "window": 60 }
+    },
+    {
+      "id": "linear",
+      "name": "Linear",
+      "category": "devtools",
+      "description": "Issues, projects, cycles, teams",
+      "tools": [
+        "linear_create_issue",
+        "linear_update_issue",
+        "linear_list_issues",
+        "linear_get_projects",
+        "linear_get_teams",
+        "linear_create_comment",
+        "linear_search_issues",
+        "linear_get_cycles"
+      ],
+      "actions": [
+        "sprint_report",
+        "issue_sync"
+      ],
+      "triggers": [
+        "issue_created",
+        "issue_status_changed",
+        "cycle_completed"
+      ],
+      "rateLimit": { "requests": 60, "window": 60 }
+    },
+    {
+      "id": "shopify",
+      "name": "Shopify",
+      "category": "ecommerce",
+      "description": "Products, orders, customers, inventory",
+      "tools": [
+        "shopify_list_products",
+        "shopify_create_product",
+        "shopify_update_product",
+        "shopify_list_orders",
+        "shopify_get_order",
+        "shopify_create_order",
+        "shopify_list_customers",
+        "shopify_get_inventory",
+        "shopify_update_inventory",
+        "shopify_create_discount",
+        "shopify_get_analytics",
+        "shopify_fulfill_order"
+      ],
+      "actions": [
+        "inventory_alert",
+        "order_report",
+        "product_sync"
+      ],
+      "triggers": [
+        "order_placed",
+        "order_fulfilled",
+        "product_updated",
+        "customer_created",
+        "inventory_low"
+      ],
+      "rateLimit": { "requests": 40, "window": 60 }
+    },
+    {
+      "id": "hubspot",
+      "name": "HubSpot",
+      "category": "crm",
+      "description": "CRM contacts, deals, companies, marketing",
+      "tools": [
+        "hubspot_create_contact",
+        "hubspot_get_contact",
+        "hubspot_update_contact",
+        "hubspot_search_contacts",
+        "hubspot_create_deal",
+        "hubspot_update_deal",
+        "hubspot_list_deals",
+        "hubspot_create_company",
+        "hubspot_get_company",
+        "hubspot_send_email",
+        "hubspot_get_analytics",
+        "hubspot_create_note"
+      ],
+      "actions": [
+        "deal_report",
+        "contact_sync",
+        "marketing_report"
+      ],
+      "triggers": [
+        "contact_created",
+        "deal_stage_changed",
+        "form_submitted",
+        "email_opened"
+      ],
+      "rateLimit": { "requests": 100, "window": 10 }
+    },
+    {
+      "id": "calendly",
+      "name": "Calendly",
+      "category": "scheduling",
+      "description": "Events, scheduling, invitees",
+      "tools": [
+        "calendly_list_event_types",
+        "calendly_get_events",
+        "calendly_get_invitee",
+        "calendly_cancel_event",
+        "calendly_list_invitees",
+        "calendly_get_user"
+      ],
+      "actions": [
+        "booking_notify",
+        "calendar_sync"
+      ],
+      "triggers": [
+        "event_scheduled",
+        "event_cancelled",
+        "invitee_created"
+      ],
+      "rateLimit": { "requests": 30, "window": 60 }
+    },
+    {
+      "id": "google_calendar",
+      "name": "Google Calendar",
+      "category": "scheduling",
+      "description": "Events, calendars, reminders, availability",
+      "tools": [
+        "gcal_list_events",
+        "gcal_create_event",
+        "gcal_update_event",
+        "gcal_delete_event",
+        "gcal_get_freebusy",
+        "gcal_list_calendars",
+        "gcal_create_calendar",
+        "gcal_quick_add"
+      ],
+      "actions": [
+        "availability_check",
+        "event_batch"
+      ],
+      "triggers": [
+        "event_created",
+        "event_updated",
+        "event_reminder"
+      ],
+      "rateLimit": { "requests": 100, "window": 60 }
+    }
+  ],
+  "categories": {
+    "crm": { "label": "CRM", "icon": "users" },
+    "payments": { "label": "Payments", "icon": "credit-card" },
+    "communication": { "label": "Communication", "icon": "message-circle" },
+    "ai": { "label": "AI", "icon": "brain" },
+    "email": { "label": "Email", "icon": "mail" },
+    "database": { "label": "Database", "icon": "database" },
+    "productivity": { "label": "Productivity", "icon": "layout" },
+    "devtools": { "label": "Dev Tools", "icon": "code" },
+    "ecommerce": { "label": "E-Commerce", "icon": "shopping-cart" },
+    "scheduling": { "label": "Scheduling", "icon": "calendar" }
+  }
+}
