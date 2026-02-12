@@ -1,17 +1,18 @@
 # ═══════════════════════════════════════════════════════════════
-# 0nMCP — Auto-Update Stats on Catalog Change
+# 0nMCP — Verify Stats Are Up-to-Date
 # ═══════════════════════════════════════════════════════════════
 #
-# When lib/catalog.json is modified, automatically:
-#   1. Regenerate stats.json + badges.json
-#   2. Update package.json description
-#   3. Update README.md stat markers
-#   4. Commit changes back to main
+# When lib/catalog.json is modified, verify that stats files
+# are also updated. Fails if stats are stale.
 #
-# This means: edit catalog.json → everything else updates itself
+# Stats are generated LOCALLY via npm scripts:
+#   - prepublishOnly: node scripts/generate-stats.js --all
+#   - preversion: node scripts/generate-stats.js --all
+#
+# This workflow does NOT push to main. It only verifies.
 # ═══════════════════════════════════════════════════════════════
 
-name: Update Stats
+name: Verify Stats
 
 on:
   push:
@@ -20,44 +21,42 @@ on:
       - 'lib/catalog.json'      # Only run when catalog changes
 
 jobs:
-  update-stats:
-    name: 📊 Sync Stats from Catalog
+  verify-stats:
+    name: 📊 Verify Stats Are Current
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read             # Read-only — never pushes
 
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Generate all stats
-        run: node scripts/generate-stats.js --all
-
-      - name: Commit updated stats
+      - name: Generate stats and check for drift
         run: |
-          git config user.name "0nMCP Bot"
-          git config user.email "bot@0nmcp.com"
-          
-          git add lib/stats.json lib/badges.json package.json README.md
-          
-          # Only commit if there are changes
-          if git diff --cached --quiet; then
-            echo "No stat changes detected"
-          else
-            TOOLS=$(jq '.tools' lib/stats.json)
-            SERVICES=$(jq '.services' lib/stats.json)
-            TRIGGERS=$(jq '.triggers' lib/stats.json)
-            ACTIONS=$(jq '.actions' lib/stats.json)
-            
-            git commit -m "📊 stats: ${TOOLS} tools, ${SERVICES} services, ${ACTIONS} actions, ${TRIGGERS} triggers"
-            git push
-            
-            echo "✅ Stats committed and pushed"
+          # Save current committed stats
+          cp lib/stats.json /tmp/stats-before.json
+          cp lib/badges.json /tmp/badges-before.json
+
+          # Regenerate
+          node scripts/generate-stats.js --all
+
+          # Compare
+          if ! diff -q lib/stats.json /tmp/stats-before.json > /dev/null 2>&1; then
+            echo "⚠️  Stats are out of date. Run 'npm run stats' locally and commit."
+            echo ""
+            echo "Diff:"
+            diff /tmp/stats-before.json lib/stats.json || true
+            exit 1
           fi
+
+          if ! diff -q lib/badges.json /tmp/badges-before.json > /dev/null 2>&1; then
+            echo "⚠️  Badges are out of date. Run 'npm run stats' locally and commit."
+            exit 1
+          fi
+
+          echo "✅ Stats are up to date"

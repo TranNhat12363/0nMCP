@@ -4,7 +4,6 @@
 #
 # Triggers on:
 #   1. Push a version tag (v1.2.3) → full publish
-#   2. Push to main → update stats only
 #
 # Publishes to:
 #   - npmjs.com/package/0nmcp
@@ -20,8 +19,6 @@ on:
   push:
     tags:
       - 'v*'          # Publish on version tags (v1.3.0, v1.3.1, etc.)
-    branches:
-      - main           # Stats update on every push to main
 
 # Cancel in-progress runs for same ref
 concurrency:
@@ -34,7 +31,7 @@ jobs:
     name: 📊 Generate Stats
     runs-on: ubuntu-latest
     permissions:
-      contents: write    # To commit stats.json back
+      contents: read
     outputs:
       tools: ${{ steps.stats.outputs.tools }}
       services: ${{ steps.stats.outputs.services }}
@@ -72,15 +69,6 @@ jobs:
           echo "total=$TOTAL" >> $GITHUB_OUTPUT
           
           echo "📊 Stats: $TOOLS tools, $SERVICES services, $ACTIONS actions, $TRIGGERS triggers ($TOTAL total)"
-
-      - name: Commit stats if changed
-        if: github.ref == 'refs/heads/main'
-        run: |
-          git config user.name "0nMCP Bot"
-          git config user.email "bot@0nmcp.com"
-          git add lib/stats.json lib/badges.json package.json README.md
-          git diff --cached --quiet || git commit -m "📊 auto-update stats: ${{ steps.stats.outputs.tools }} tools, ${{ steps.stats.outputs.services }} services"
-          git push || true
 
   # ─── Step 2: Publish to NPM ────────────────────────────────
   publish-npm:
