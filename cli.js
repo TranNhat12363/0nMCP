@@ -6,6 +6,8 @@
  * 
  * Usage:
  *   npx 0nmcp              Start MCP server (stdio)
+ *   npx 0nmcp serve        Start HTTP server (REST + MCP + webhooks)
+ *   npx 0nmcp run <wf>     Run a .0n workflow from CLI
  *   npx 0nmcp init         Initialize ~/.0n directory
  *   npx 0nmcp connect      Interactive connection setup
  *   npx 0nmcp list         List connected services
@@ -68,11 +70,21 @@ async function main() {
     console.log(`
 ${c.bright}Usage:${c.reset}
 
-  ${c.cyan}npx 0nmcp${c.reset}              Start MCP server (for Claude Desktop)
+  ${c.cyan}npx 0nmcp${c.reset}              Start MCP server (stdio, for Claude Desktop)
+  ${c.cyan}npx 0nmcp serve${c.reset}        Start HTTP server (REST + MCP + webhooks)
+  ${c.cyan}npx 0nmcp run <wf>${c.reset}     Run a .0n workflow from CLI
   ${c.cyan}npx 0nmcp init${c.reset}         Initialize ~/.0n directory
   ${c.cyan}npx 0nmcp connect${c.reset}      Interactive connection setup
   ${c.cyan}npx 0nmcp list${c.reset}         List connected services
   ${c.cyan}npx 0nmcp migrate${c.reset}      Migrate from ~/.0nmcp to ~/.0n
+
+${c.bright}Serve options:${c.reset}
+
+  ${c.cyan}npx 0nmcp serve --port 3000 --host 0.0.0.0${c.reset}
+
+${c.bright}Run options:${c.reset}
+
+  ${c.cyan}npx 0nmcp run invoice-notify --input customer_email=test@x.com --input amount=100${c.reset}
 
 ${c.bright}Configure Claude Desktop:${c.reset}
 
@@ -117,6 +129,85 @@ ${c.bright}Links:${c.reset}
     return;
   }
 
+  // Serve (HTTP server)
+  if (command === 'serve') {
+    console.log(BANNER);
+    const port = getFlag(args, '--port', 3000);
+    const host = getFlag(args, '--host', '0.0.0.0');
+
+    console.log(`${c.bright}Starting HTTP server...${c.reset}\n`);
+
+    const { startServer } = await import('./server.js');
+    await startServer({ port: Number(port), host: String(host) });
+    return;
+  }
+
+  // Run (execute a workflow from CLI)
+  if (command === 'run') {
+    const workflowName = args[1];
+    if (!workflowName) {
+      console.log(`${c.red}Usage: npx 0nmcp run <workflow-name> [--input key=value]${c.reset}`);
+      process.exit(1);
+    }
+
+    // Parse --input flags
+    const inputs = {};
+    for (let i = 2; i < args.length; i++) {
+      if (args[i] === '--input' && args[i + 1]) {
+        const [key, ...valueParts] = args[i + 1].split('=');
+        const value = valueParts.join('=');
+        // Auto-type: numbers and booleans
+        if (value === 'true') inputs[key] = true;
+        else if (value === 'false') inputs[key] = false;
+        else if (!isNaN(value) && value !== '') inputs[key] = Number(value);
+        else inputs[key] = value;
+        i++;
+      }
+    }
+
+    console.log(`${c.bright}Running workflow: ${c.cyan}${workflowName}${c.reset}`);
+    if (Object.keys(inputs).length > 0) {
+      console.log(`${c.bright}Inputs:${c.reset}`, JSON.stringify(inputs, null, 2));
+    }
+    console.log('');
+
+    try {
+      const { ConnectionManager } = await import('./connections.js');
+      const { WorkflowRunner } = await import('./workflow.js');
+
+      const connections = new ConnectionManager();
+      const runner = new WorkflowRunner(connections);
+      const result = await runner.run({ workflowPath: workflowName, inputs });
+
+      if (result.success) {
+        console.log(`${c.green}${c.bright}Workflow completed successfully${c.reset}`);
+      } else {
+        console.log(`${c.red}${c.bright}Workflow failed${c.reset}`);
+      }
+
+      console.log(`\n${c.bright}Execution ID:${c.reset} ${result.executionId}`);
+      console.log(`${c.bright}Steps:${c.reset} ${result.stepsSuccessful}/${result.stepsExecuted} successful`);
+      console.log(`${c.bright}Duration:${c.reset} ${result.duration}ms`);
+
+      if (result.outputs && Object.keys(result.outputs).length > 0) {
+        console.log(`\n${c.bright}Outputs:${c.reset}`);
+        console.log(JSON.stringify(result.outputs, null, 2));
+      }
+
+      if (result.errors.length > 0) {
+        console.log(`\n${c.red}${c.bright}Errors:${c.reset}`);
+        for (const err of result.errors) {
+          console.log(`  ${c.red}●${c.reset} ${err.service}.${err.action}: ${err.error}`);
+        }
+      }
+
+      process.exit(result.success ? 0 : 1);
+    } catch (err) {
+      console.log(`${c.red}Error: ${err.message}${c.reset}`);
+      process.exit(1);
+    }
+  }
+
   // Migrate
   if (command === 'migrate') {
     console.log(BANNER);
@@ -130,6 +221,15 @@ ${c.bright}Links:${c.reset}
   console.log(`${c.red}Unknown command: ${command}${c.reset}`);
   console.log(`Run ${c.cyan}npx 0nmcp help${c.reset} for usage`);
   process.exit(1);
+}
+
+/**
+ * Get a CLI flag value: --flag value
+ */
+function getFlag(args, flag, defaultValue) {
+  const idx = args.indexOf(flag);
+  if (idx !== -1 && args[idx + 1]) return args[idx + 1];
+  return defaultValue;
 }
 
 function initDotOn() {
