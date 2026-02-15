@@ -13,6 +13,7 @@
  *   npx 0nmcp list         List connected services
  *   npx 0nmcp migrate      Migrate from ~/.0nmcp to ~/.0n
  *   npx 0nmcp engine       Engine commands (import, verify, platforms, export, open)
+ *   npx 0nmcp app          Application commands (run, build, inspect, validate, list)
  * 
  * ═══════════════════════════════════════════════════════════════════════════
  */
@@ -86,6 +87,14 @@ ${c.bright}Engine commands:${c.reset}
   ${c.cyan}npx 0nmcp engine platforms${c.reset}        Generate AI platform configs
   ${c.cyan}npx 0nmcp engine export${c.reset}           Export .0n bundle (AI Brain)
   ${c.cyan}npx 0nmcp engine open <bundle>${c.reset}    Open/inspect a .0n bundle
+
+${c.bright}Application commands:${c.reset}
+
+  ${c.cyan}npx 0nmcp app run <file>${c.reset}          Start application server
+  ${c.cyan}npx 0nmcp app build${c.reset}               Build application bundle
+  ${c.cyan}npx 0nmcp app inspect <file>${c.reset}      Show application metadata
+  ${c.cyan}npx 0nmcp app validate <file>${c.reset}     Validate application structure
+  ${c.cyan}npx 0nmcp app list${c.reset}                List installed applications
 
 ${c.bright}Serve options:${c.reset}
 
@@ -217,6 +226,13 @@ ${c.bright}Links:${c.reset}
     }
   }
 
+  // App
+  if (command === 'app') {
+    console.log(BANNER);
+    await handleApp(args.slice(1));
+    return;
+  }
+
   // Engine
   if (command === 'engine') {
     console.log(BANNER);
@@ -256,6 +272,7 @@ function initDotOn() {
     path.join(DOT_ON_DIR, 'snapshots'),
     path.join(DOT_ON_DIR, 'history'),
     path.join(DOT_ON_DIR, 'cache'),
+    path.join(DOT_ON_DIR, 'apps'),
   ];
 
   console.log(`${c.bright}Initializing ~/.0n directory...${c.reset}\n`);
@@ -674,6 +691,225 @@ async function handleEngine(args) {
 
   console.log(`${c.red}Unknown engine command: ${sub}${c.reset}`);
   console.log(`Run ${c.cyan}npx 0nmcp engine help${c.reset} for usage`);
+  process.exit(1);
+}
+
+async function handleApp(args) {
+  const sub = args[0];
+
+  if (!sub || sub === 'help') {
+    console.log(`${c.bright}Application Engine — Build & Run .0n Applications${c.reset}\n`);
+    console.log(`  ${c.cyan}run <file>${c.reset}        Start application server`);
+    console.log(`  ${c.cyan}build${c.reset}             Build application bundle`);
+    console.log(`  ${c.cyan}inspect <file>${c.reset}    Show application metadata`);
+    console.log(`  ${c.cyan}validate <file>${c.reset}   Validate application structure`);
+    console.log(`  ${c.cyan}list${c.reset}              List installed applications\n`);
+    return;
+  }
+
+  if (sub === 'run') {
+    const appFile = args[1];
+    if (!appFile) {
+      console.log(`${c.red}Usage: npx 0nmcp app run <file.0n> [--port 3000] [--passphrase <pw>]${c.reset}`);
+      process.exit(1);
+    }
+
+    const port = Number(getFlag(args, '--port', 3000));
+    let passphrase = getFlag(args, '--passphrase', null);
+
+    if (!passphrase) {
+      const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+      const ask = (q) => new Promise(resolve => rl.question(q, resolve));
+      passphrase = await ask('Application passphrase: ');
+      rl.close();
+    }
+
+    if (!passphrase) {
+      console.log(`${c.red}Passphrase required.${c.reset}`);
+      process.exit(1);
+    }
+
+    try {
+      const { openApplication } = await import('./engine/app-builder.js');
+      const { Application } = await import('./engine/application.js');
+      const { ApplicationServer } = await import('./engine/app-server.js');
+
+      const bundle = openApplication(appFile, passphrase);
+      const application = new Application(bundle, { passphrase });
+      const server = new ApplicationServer(application);
+
+      await server.start({ port });
+
+      // Keep alive
+      process.on('SIGINT', async () => {
+        console.log(`\n${c.yellow}Shutting down...${c.reset}`);
+        await server.stop();
+        process.exit(0);
+      });
+    } catch (err) {
+      console.log(`${c.red}Error: ${err.message}${c.reset}`);
+      process.exit(1);
+    }
+    return;
+  }
+
+  if (sub === 'build') {
+    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+    const ask = (q) => new Promise(resolve => rl.question(q, resolve));
+
+    try {
+      const appName = await ask('Application name: ') || '0n Application';
+      const passphrase = await ask('Bundle passphrase: ');
+      if (!passphrase) {
+        console.log(`${c.red}Passphrase required.${c.reset}`);
+        rl.close();
+        process.exit(1);
+      }
+      rl.close();
+
+      const { createApplication } = await import('./engine/app-builder.js');
+
+      // Load local connections
+      const connectionsDir = path.join(DOT_ON_DIR, 'connections');
+      const connections = {};
+      if (fs.existsSync(connectionsDir)) {
+        const files = fs.readdirSync(connectionsDir).filter(f => f.endsWith('.0n') || f.endsWith('.0n.json'));
+        for (const file of files) {
+          try {
+            const data = JSON.parse(fs.readFileSync(path.join(connectionsDir, file), 'utf8'));
+            if (data.$0n?.sealed) continue;
+            connections[data.service] = {
+              credentials: data.auth?.credentials || {},
+              name: data.$0n?.name || data.service,
+              authType: data.auth?.type || 'api_key',
+              environment: data.environment || 'production',
+            };
+          } catch { /* skip */ }
+        }
+      }
+
+      // Load local workflows
+      const { loadLocalWorkflows } = await import('./engine/index.js');
+      const workflows = loadLocalWorkflows();
+
+      console.log(`\n${c.bright}Building application...${c.reset}\n`);
+
+      const result = createApplication({
+        name: appName,
+        passphrase,
+        connections,
+        workflows,
+      });
+
+      console.log(`${c.green}${c.bright}Application built!${c.reset}\n`);
+      console.log(`  Path:        ${result.path}`);
+      console.log(`  Connections: ${result.manifest.connection_count}`);
+      console.log(`  Workflows:   ${result.manifest.workflow_count}`);
+      console.log(`\n${c.bright}Run with:${c.reset} ${c.cyan}npx 0nmcp app run ${result.path}${c.reset}`);
+    } catch (err) {
+      console.log(`${c.red}Error: ${err.message}${c.reset}`);
+      process.exit(1);
+    }
+    return;
+  }
+
+  if (sub === 'inspect') {
+    const appFile = args[1];
+    if (!appFile) {
+      console.log(`${c.red}Usage: npx 0nmcp app inspect <file.0n>${c.reset}`);
+      process.exit(1);
+    }
+
+    try {
+      const { inspectApplication } = await import('./engine/app-builder.js');
+      const info = inspectApplication(appFile);
+
+      console.log(`${c.bright}Application: ${info.name}${c.reset}\n`);
+      console.log(`  Version:     ${info.version}`);
+      console.log(`  Author:      ${info.author || '—'}`);
+      console.log(`  Created:     ${info.created}`);
+      if (info.description) console.log(`  Description: ${info.description}`);
+      console.log(`\n  Connections: ${info.connections.map(c2 => c2.service).join(', ') || 'none'}`);
+      console.log(`  Workflows:   ${info.workflows.join(', ') || 'none'}`);
+      console.log(`  Operations:  ${info.operations.join(', ') || 'none'}`);
+      console.log(`  Endpoints:   ${info.endpoints.join(', ') || 'none'}`);
+      console.log(`  Automations: ${info.automations.join(', ') || 'none'}`);
+    } catch (err) {
+      console.log(`${c.red}Error: ${err.message}${c.reset}`);
+      process.exit(1);
+    }
+    return;
+  }
+
+  if (sub === 'validate') {
+    const appFile = args[1];
+    if (!appFile) {
+      console.log(`${c.red}Usage: npx 0nmcp app validate <file.0n>${c.reset}`);
+      process.exit(1);
+    }
+
+    try {
+      const { validateApplication } = await import('./engine/app-builder.js');
+      const data = JSON.parse(fs.readFileSync(appFile, 'utf8'));
+      const result = validateApplication(data);
+
+      if (result.valid) {
+        console.log(`${c.green}${c.bright}Application is valid!${c.reset}`);
+      } else {
+        console.log(`${c.red}${c.bright}Validation failed:${c.reset}\n`);
+        for (const err of result.errors) {
+          console.log(`  ${c.red}●${c.reset} ${err}`);
+        }
+      }
+
+      if (result.warnings?.length > 0) {
+        console.log(`\n${c.yellow}Warnings:${c.reset}`);
+        for (const w of result.warnings) {
+          console.log(`  ${c.yellow}○${c.reset} ${w}`);
+        }
+      }
+    } catch (err) {
+      console.log(`${c.red}Error: ${err.message}${c.reset}`);
+      process.exit(1);
+    }
+    return;
+  }
+
+  if (sub === 'list') {
+    const appsDir = path.join(DOT_ON_DIR, 'apps');
+    if (!fs.existsSync(appsDir)) {
+      console.log(`${c.yellow}No applications installed.${c.reset}`);
+      return;
+    }
+
+    const files = fs.readdirSync(appsDir).filter(f => f.endsWith('.0n') || f.endsWith('.0n.json'));
+    if (files.length === 0) {
+      console.log(`${c.yellow}No applications installed.${c.reset}`);
+      return;
+    }
+
+    console.log(`${c.bright}Installed Applications:${c.reset}\n`);
+
+    for (const file of files) {
+      try {
+        const data = JSON.parse(fs.readFileSync(path.join(appsDir, file), 'utf8'));
+        if (data.$0n?.type !== 'application') continue;
+
+        const wfCount = Object.keys(data.workflows || {}).length;
+        const epCount = Object.keys(data.endpoints || {}).length;
+        console.log(`  ${c.green}●${c.reset} ${c.bright}${data.$0n.name || file}${c.reset} v${data.$0n.version || '1.0.0'}`);
+        console.log(`    ${wfCount} workflows, ${epCount} endpoints`);
+        console.log(`    ${file}`);
+        console.log('');
+      } catch {
+        console.log(`  ${c.red}●${c.reset} ${file} (error reading)`);
+      }
+    }
+    return;
+  }
+
+  console.log(`${c.red}Unknown app command: ${sub}${c.reset}`);
+  console.log(`Run ${c.cyan}npx 0nmcp app help${c.reset} for usage`);
   process.exit(1);
 }
 

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-15T01:12:52.909Z",
+  "generated": "2026-02-15T02:11:53.848Z",
   "catalogVersion": "1.2.2",
   "services": 26,
   "tools": 290,
@@ -794,6 +794,7 @@
   "crmTools": 245,
   "vaultTools": 4,
   "engineTools": 6,
-  "totalTools": 545,
-  "totalCapabilities": 703
+  "appTools": 5,
+  "totalTools": 550,
+  "totalCapabilities": 708
 }

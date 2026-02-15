@@ -92,7 +92,7 @@ export async function createApp() {
 
       // New session
       const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: () => crypto.randomUUID() });
-      const server = new McpServer({ name: "0nMCP", version: "1.6.0" });
+      const server = new McpServer({ name: "0nMCP", version: "1.7.0" });
       registerAllTools(server, connections, orchestrator, workflowRunner);
       registerCrmTools(server, z);
       registerVaultTools(server, z);
@@ -123,7 +123,7 @@ export async function createApp() {
     res.json({
       status: "ok",
       name: "0nMCP",
-      version: "1.6.0",
+      version: "1.7.0",
       uptime: process.uptime(),
       connections: connections.count(),
       workflows: workflowRunner.listWorkflows().length,

@@ -18,6 +18,7 @@ const SNAPSHOTS_DIR = join(DOT_ON, "snapshots");
 const HISTORY_DIR = join(DOT_ON, "history");
 const CACHE_DIR = join(DOT_ON, "cache");
 const PLUGINS_DIR = join(DOT_ON, "plugins");
+const APPS_DIR = join(DOT_ON, "apps");
 const CONFIG_FILE = join(DOT_ON, "config.json");
 
 // Legacy path for migration
@@ -28,7 +29,7 @@ const LEGACY_FILE = join(LEGACY_DIR, "connections.json");
  * Initialize the ~/.0n/ directory structure.
  */
 export function initDotOn() {
-  const dirs = [DOT_ON, CONNECTIONS_DIR, WORKFLOWS_DIR, SNAPSHOTS_DIR, HISTORY_DIR, CACHE_DIR, PLUGINS_DIR];
+  const dirs = [DOT_ON, CONNECTIONS_DIR, WORKFLOWS_DIR, SNAPSHOTS_DIR, HISTORY_DIR, CACHE_DIR, PLUGINS_DIR, APPS_DIR];
   for (const dir of dirs) {
     if (!existsSync(dir)) {
       mkdirSync(dir, { recursive: true });
@@ -331,3 +332,4 @@ export const CONNECTIONS_PATH = CONNECTIONS_DIR;
 export const HISTORY_PATH = HISTORY_DIR;
 export const WORKFLOWS_PATH = WORKFLOWS_DIR;
 export const SNAPSHOTS_PATH = SNAPSHOTS_DIR;
+export const APPS_PATH = APPS_DIR;

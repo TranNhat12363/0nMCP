@@ -198,6 +198,10 @@ export function openBundle(bundlePath, passphrase, options = {}) {
   const raw = readFileSync(bundlePath, "utf-8");
   const bundle = JSON.parse(raw);
 
+  if (bundle.$0n?.type === "application") {
+    throw new Error("This is a .0n application file, not a bundle. Use app_open instead.");
+  }
+
   if (!bundle.$0n || bundle.$0n.type !== "bundle") {
     throw new Error("Not a valid .0n bundle file.");
   }
@@ -302,6 +306,11 @@ export function inspectBundle(bundlePath) {
   const raw = readFileSync(bundlePath, "utf-8");
   const bundle = JSON.parse(raw);
 
+  // Delegate application bundles
+  if (bundle.$0n?.type === "application") {
+    throw new Error("This is a .0n application file, not a bundle. Use app_inspect/app_open instead.");
+  }
+
   if (!bundle.$0n || bundle.$0n.type !== "bundle") {
     throw new Error("Not a valid .0n bundle file.");
   }
@@ -337,6 +346,10 @@ export function verifyBundle(bundlePath, passphrase) {
   const raw = readFileSync(bundlePath, "utf-8");
   const bundle = JSON.parse(raw);
   const errors = [];
+
+  if (bundle.$0n?.type === "application") {
+    return { valid: false, errors: ["This is a .0n application file. Use app_validate instead."] };
+  }
 
   if (!bundle.$0n || bundle.$0n.type !== "bundle") {
     return { valid: false, errors: ["Not a valid .0n bundle file."] };

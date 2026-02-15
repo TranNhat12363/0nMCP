@@ -1,3 +1,7 @@
 node_modules/
 .env
 .DS_Store
+.mcpregistry_*
+server.json
+server.json.bak
+test-*.mjs

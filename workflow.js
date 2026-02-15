@@ -156,7 +156,7 @@ function evaluateComputeExpression(expr) {
 
 // ── Internal action handlers ─────────────────────────────
 
-const INTERNAL_ACTIONS = {
+export const INTERNAL_ACTIONS = {
   lookup(params) {
     const { table, key, value } = params;
     if (!table || !key) return { matched: false };
@@ -282,7 +282,7 @@ export class WorkflowRunner {
     const context = {
       inputs,
       steps: {},
-      env: process.env,
+      env: this._customEnv || process.env,
     };
 
     // 4. Execute steps
@@ -311,7 +311,10 @@ export class WorkflowRunner {
       // Execute
       let result;
       try {
-        if (step.service === 'internal') {
+        if (step.operation && this._operations) {
+          const opResult = await this._operations.execute(step.operation, resolvedParams, { connections: this.connections, env: context.env });
+          result = { data: opResult };
+        } else if (step.service === 'internal') {
           result = await this._executeInternal(step.action, resolvedParams);
         } else {
           result = await this._executeService(step.service, step.action, resolvedParams);
@@ -342,7 +345,10 @@ export class WorkflowRunner {
           for (let attempt = 1; attempt <= maxRetries; attempt++) {
             await new Promise(r => setTimeout(r, backoff * attempt));
             try {
-              if (step.service === 'internal') {
+              if (step.operation && this._operations) {
+                const opResult = await this._operations.execute(step.operation, resolvedParams, { connections: this.connections, env: context.env });
+                result = { data: opResult };
+              } else if (step.service === 'internal') {
                 result = await this._executeInternal(step.action, resolvedParams);
               } else {
                 result = await this._executeService(step.service, step.action, resolvedParams);
@@ -404,6 +410,32 @@ export class WorkflowRunner {
       steps: stepResults,
       errors,
     };
+  }
+
+  /**
+   * Run a workflow with an OperationRegistry and custom environment.
+   * Used by the Application Engine for executing application workflows.
+   *
+   * @param {object} opts
+   * @param {object} opts.workflow — Inline workflow definition
+   * @param {object} [opts.inputs] — Input values
+   * @param {import("./engine/operations.js").OperationRegistry} [opts.operations] — Operation registry
+   * @param {object} [opts.env] — Custom environment variables
+   * @returns {Promise<object>}
+   */
+  async runWithOperations({ workflow, inputs = {}, operations, env }) {
+    // Temporarily set operations and env on instance
+    const prevOps = this._operations;
+    const prevEnv = this._customEnv;
+    this._operations = operations || null;
+    this._customEnv = env || null;
+
+    try {
+      return await this.run({ workflow, inputs });
+    } finally {
+      this._operations = prevOps;
+      this._customEnv = prevEnv;
+    }
   }
 
   /**
