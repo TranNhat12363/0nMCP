@@ -175,6 +175,8 @@
   "files": [
     "index.js",
     "cli.js",
+    "commands.js",
+    "command-runner.js",
     "tools.js",
     "workflow.js",
     "server.js",
@@ -204,6 +206,6 @@
     "triggers": 93,
     "totalCapabilities": 708,
     "categories": 13,
-    "lastUpdated": "2026-02-15T02:11:53.848Z"
+    "lastUpdated": "2026-02-15T08:02:44.106Z"
   }
 }

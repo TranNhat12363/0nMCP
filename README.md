@@ -20,19 +20,19 @@
 [![MCP](https://img.shields.io/badge/MCP-Compatible-blueviolet?style=flat-square)](https://modelcontextprotocol.io)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Services](https://img.shields.io/badge/services-26+-blue?style=flat-square)](#-supported-services)
-[![Tools](https://img.shields.io/badge/tools-535-orange?style=flat-square)](#-all-tools)
+[![Tools](https://img.shields.io/badge/tools-550-orange?style=flat-square)](#-all-tools)
 [![Community](https://img.shields.io/badge/community-1000%2B_devs-ff6600?style=flat-square)](#-community)
 [![GitHub Discussions](https://img.shields.io/github/discussions/0nork/0nMCP?style=flat-square&label=discussions)](https://github.com/0nork/0nMCP/discussions)
 
-**535 tools. 26 services. Zero configuration. One natural language interface.**
+**550 tools. 26 services. Zero configuration. One natural language interface.**
 
-[Quick Start](#-installation) · [Services](#-supported-services) · [535 Tools](#-all-tools) · [.0n Standard](#-the-0n-standard) · [Unlocks](#-unlocks) · [Community](#-community) · [Contributing](#-contributing)
+[Quick Start](#-installation) · [Services](#-supported-services) · [550 Tools](#-all-tools) · [.0n Standard](#-the-0n-standard) · [Unlocks](#-unlocks) · [Community](#-community) · [Contributing](#-contributing)
 
 </div>
 
 ---
 
-> **v1.3.0** — 535 tools across 26 services in 13 categories. Gmail, Google Sheets, Google Drive, Jira, Zendesk, Mailchimp, Zoom, Microsoft 365, and MongoDB now live. Full CRM coverage (245 tools), rate limiting, webhooks, TypeScript definitions, and a growing open source community. [See what's new](#-whats-new-in-v13).
+> **v1.7.0** — 550 tools across 26 services in 13 categories. Now with the **.0n Conversion Engine** (portable AI Brain bundles), **Vault** (machine-bound encrypted credential storage), **Application Engine** (build + distribute .0n apps), **Workflow Runtime** + **HTTP Server**, and a **CLI with named runs**. [See what's new](#-whats-new-in-v17).
 
 ---
 
@@ -157,7 +157,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (Mac) o
 | **MongoDB** | Database | Find, insert, update, delete, aggregate documents via Atlas Data API |
 | **CRM** | CRM | **245 tools** — contacts, conversations, calendars, invoices, payments, products, pipelines, social media, custom objects, and more |
 
-**26 services. 535 tools. 13 categories. One interface.**
+**26 services. 550 tools. 13 categories. One interface.**
 
 > **More coming:** QuickBooks, Asana, Intercom, AWS S3, Vercel, Cloudflare, Firebase, Figma...
 
@@ -267,24 +267,25 @@ The deepest CRM integration available in any MCP server. 245 tools across 12 mod
 | **Users** | 24 | Users, forms, surveys, funnels, media, companies, businesses |
 | **Objects** | 34 | Custom objects, associations, email, workflows, snapshots, links, campaigns, courses, SaaS |
 
-**535 total tools.** Universal orchestration (290 catalog tools across 26 services) + the most comprehensive CRM integration in the MCP ecosystem (245 dedicated tools).
+**550 total tools.** Universal orchestration (290 catalog tools across 26 services) + the most comprehensive CRM integration in the MCP ecosystem (245 dedicated tools).
 
 > Every CRM tool is data-driven — defined as configuration, not code. Adding new endpoints takes minutes, not hours. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
-## What's New in v1.3
+## What's New in v1.7
 
-- **26 services, 535 tools** — up from 17 services and 252 tools
-- **9 new integrations** — Gmail, Google Sheets, Google Drive, Jira, Zendesk, Mailchimp, Zoom, Microsoft 365, MongoDB
-- **13 categories** — added Storage, Support, and Marketing categories
-- **Three-Level Execution Hierarchy** (Patent Pending) — Pipeline → Assembly Line → Radial Burst
+- **550 tools across 26 services** in 13 categories — 708 total capabilities
+- **.0n Conversion Engine** — import credentials from .env/CSV/JSON, auto-map to 26 services, verify API keys, generate configs for 7 AI platforms (Claude Desktop, Cursor, Windsurf, Gemini, Continue, Cline, OpenAI)
+- **Vault** — machine-bound encrypted credential storage (AES-256-GCM + PBKDF2-SHA512 + hardware fingerprint)
+- **Application Engine** — build, distribute, inspect, and validate portable .0n application bundles
+- **Workflow Runtime** — load and execute `.0n` workflow files with template engine, conditions, and step chaining
+- **HTTP Server** — Express-based REST API, MCP over HTTP, and webhook receivers
+- **Named Runs / Hotkeys** — define command aliases in your SWITCH file, run them as `0nmcp launch`, `0nmcp hello`
+- **Interactive Shell** — `0nmcp shell` starts a REPL for `/command` execution
+- **Portable encryption** — passphrase-only AES-256-GCM (no machine fingerprint, works anywhere)
 - **245 CRM tools** — full API coverage across 12 modules
-- **Data-driven tool factory** — every tool is a config object, new endpoints in minutes
-- **Rate limiting** — built-in per-service rate limits with automatic retry
-- **Webhook support** — receive and process external events
-- **TypeScript definitions** — full type coverage for all exports
-- **CLI improvements** — interactive setup, legacy migration, colored output
+- **Three-Level Execution** (Patent Pending) — Pipeline → Assembly Line → Radial Burst
 
 ---
 
@@ -323,7 +324,7 @@ The orchestrator uses keyword matching to route tasks to the right service. Less
 | **Flexibility** | Say what you want | Triggers/actions only | Unlimited but complex |
 | **Maintenance** | Zero | Update broken zaps | Fix API changes |
 | **Open source** | Yes (MIT) | No | Depends |
-| **Tools available** | 535 | Varies | Whatever you build |
+| **Tools available** | 550 | Varies | Whatever you build |
 
 ---
 
@@ -505,7 +506,7 @@ The tool factory handles registration, validation, API calls, error handling —
 
 ### Phase 0 — Foundation (Current)
 
-- [x] **26 services, 535 tools, 13 categories**
+- [x] **26 services, 550 tools, 13 categories**
 - [x] Core orchestration engine with AI planning
 - [x] **245 CRM tools** — full API coverage across 12 modules
 - [x] Gmail, Google Sheets, Google Drive, Jira, Zendesk, Mailchimp, Zoom, Microsoft 365, MongoDB
@@ -588,7 +589,7 @@ We ship weekly. The codebase is active. The community is real. If you're buildin
 
 | Metric | |
 |--------|---|
-| **Tools shipped** | 535 |
+| **Tools shipped** | 550 |
 | **Services integrated** | 26 |
 | **Categories** | 13 |
 | **CRM endpoints covered** | 245 / 245 (100%) |
@@ -639,7 +640,7 @@ node index.js
 
 | Project | Description |
 |---------|-------------|
-| **[0nMCP](https://github.com/0nork/0nMCP)** | Universal AI API Orchestrator — 535 tools, 26 services, natural language interface |
+| **[0nMCP](https://github.com/0nork/0nMCP)** | Universal AI API Orchestrator — 550 tools, 26 services, natural language interface |
 | **[0n-spec](https://github.com/0nork/0n-spec)** | The .0n Standard — universal configuration format for AI orchestration |
 | **[0nork](https://github.com/0nork/0nork)** | The parent org — AI orchestration infrastructure |
 
@@ -654,7 +655,7 @@ node index.js
 
 <div align="center">
 
-**[Sponsor on GitHub](https://github.com/sponsors/0nork)** · **[Star the repo](https://github.com/0nork/0nMCP)** · **[Tell a friend](https://twitter.com/intent/tweet?text=0nMCP%20-%20535%20tools,%2026%20services,%20zero%20config.%20The%20universal%20AI%20API%20orchestrator.%20Free%20and%20open%20source.&url=https://github.com/0nork/0nMCP)**
+**[Sponsor on GitHub](https://github.com/sponsors/0nork)** · **[Star the repo](https://github.com/0nork/0nMCP)** · **[Tell a friend](https://twitter.com/intent/tweet?text=0nMCP%20-%20550%20tools,%2026%20services,%20zero%20config.%20The%20universal%20AI%20API%20orchestrator.%20Free%20and%20open%20source.&url=https://github.com/0nork/0nMCP)**
 
 </div>
 
@@ -664,7 +665,7 @@ node index.js
 
 ### Stop building workflows. Start describing outcomes.
 
-**535 tools. 26 services. Zero config. MIT licensed. Community driven.**
+**550 tools. 26 services. Zero config. MIT licensed. Community driven.**
 
 **[Get Started](https://github.com/0nork/0nMCP)** · **[Join the Community](https://0nmcp.com/community)** · **[Unlock Schedule](https://0nmcp.com/sponsor)** · **[Read the Docs](https://github.com/0nork/0n-spec)**
 

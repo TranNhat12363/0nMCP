@@ -39,7 +39,7 @@ const workflowRunner = new WorkflowRunner(connections);
 
 const server = new McpServer({
   name: "0nMCP",
-  version: "1.6.0",
+  version: "1.7.0",
 });
 
 // ============================================================

@@ -11,6 +11,9 @@
  *   npx 0nmcp init         Initialize ~/.0n directory
  *   npx 0nmcp connect      Interactive connection setup
  *   npx 0nmcp list         List connected services
+ *   npx 0nmcp commands     List named RUNs from SWITCH file
+ *   npx 0nmcp shell        Interactive REPL (type /command)
+ *   npx 0nmcp <alias>      Run a named command from SWITCH file
  *   npx 0nmcp migrate      Migrate from ~/.0nmcp to ~/.0n
  *   npx 0nmcp engine       Engine commands (import, verify, platforms, export, open)
  *   npx 0nmcp app          Application commands (run, build, inspect, validate, list)
@@ -24,6 +27,8 @@ import { fileURLToPath } from 'url';
 import fs from 'fs';
 import os from 'os';
 import readline from 'readline';
+import { loadCommands, listCommands } from './commands.js';
+import { runCommand } from './command-runner.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -95,6 +100,21 @@ ${c.bright}Application commands:${c.reset}
   ${c.cyan}npx 0nmcp app inspect <file>${c.reset}      Show application metadata
   ${c.cyan}npx 0nmcp app validate <file>${c.reset}     Validate application structure
   ${c.cyan}npx 0nmcp app list${c.reset}                List installed applications
+
+${c.bright}Named Runs (Hotkeys):${c.reset}
+
+  ${c.cyan}npx 0nmcp commands${c.reset}                    List named RUNs from SWITCH file
+  ${c.cyan}npx 0nmcp <alias>${c.reset}                     Execute a named RUN
+  ${c.cyan}npx 0nmcp shell${c.reset}                       Interactive REPL (type /command)
+
+  Define commands in ~/.0n/0n-setup.0n:
+
+  {
+    "commands": {
+      "launch": { "type": "pipeline", "steps": [{ "action": "verify" }] },
+      "score":  { "type": "workflow", "workflow": "lead-scoring" }
+    }
+  }
 
 ${c.bright}Serve options:${c.reset}
 
@@ -249,9 +269,57 @@ ${c.bright}Links:${c.reset}
     return;
   }
 
+  // Commands — list named RUNs from SWITCH file
+  if (command === 'commands' || command === 'aliases') {
+    console.log(BANNER);
+    const cmds = listCommands();
+    if (cmds.length === 0) {
+      console.log(`${c.yellow}No commands defined.${c.reset}`);
+      console.log(`\nAdd a ${c.cyan}"commands"${c.reset} section to ${c.cyan}~/.0n/0n-setup.0n${c.reset}`);
+      console.log(`\nExample:`);
+      console.log(`  {`);
+      console.log(`    "commands": {`);
+      console.log(`      "launch": { "type": "pipeline", "steps": [{ "action": "verify" }] }`);
+      console.log(`    }`);
+      console.log(`  }`);
+      return;
+    }
+    console.log(`${c.bright}Named Runs:${c.reset}\n`);
+    for (const cmd of cmds) {
+      const typeTag = cmd.type === 'pipeline' ? `${c.blue}pipeline${c.reset}` : `${c.green}workflow${c.reset}`;
+      console.log(`  ${c.cyan}0nmcp ${cmd.alias}${c.reset}  ${cmd.description || cmd.name}  [${typeTag}]`);
+    }
+    console.log(`\n${c.bright}Tip:${c.reset} Run ${c.cyan}0nmcp shell${c.reset} for an interactive REPL where you can type ${c.cyan}/launch${c.reset}, ${c.cyan}/hello${c.reset}, etc.`);
+    return;
+  }
+
+  // Shell — interactive REPL
+  if (command === 'shell' || command === 'repl') {
+    console.log(BANNER);
+    await startShell();
+    return;
+  }
+
+  // Dynamic command aliases from SWITCH file
+  const switchCommands = loadCommands();
+  if (switchCommands.has(command)) {
+    console.log(BANNER);
+    const def = switchCommands.get(command);
+    const cliArgs = args.slice(1);
+    await runCommand(command, def, cliArgs);
+    return;
+  }
+
   // Unknown command
   console.log(`${c.red}Unknown command: ${command}${c.reset}`);
-  console.log(`Run ${c.cyan}npx 0nmcp help${c.reset} for usage`);
+  const switchCmds = listCommands();
+  if (switchCmds.length > 0) {
+    console.log(`\n${c.bright}Available named RUNs:${c.reset}`);
+    for (const cmd of switchCmds) {
+      console.log(`  ${c.cyan}0nmcp ${cmd.alias}${c.reset}  ${cmd.description || cmd.name}`);
+    }
+  }
+  console.log(`\nRun ${c.cyan}npx 0nmcp help${c.reset} for usage`);
   process.exit(1);
 }
 
@@ -911,6 +979,127 @@ async function handleApp(args) {
   console.log(`${c.red}Unknown app command: ${sub}${c.reset}`);
   console.log(`Run ${c.cyan}npx 0nmcp app help${c.reset} for usage`);
   process.exit(1);
+}
+
+async function startShell() {
+  const cmds = loadCommands();
+  const aliases = [...cmds.keys()];
+  const builtins = ['help', 'commands', 'list', 'exit', 'quit'];
+  const allCompletions = [...builtins, ...aliases];
+
+  console.log(`${c.bright}0nMCP Interactive Shell${c.reset}`);
+  console.log(`Type ${c.cyan}/command${c.reset} to run a named RUN, ${c.cyan}/commands${c.reset} to list, ${c.cyan}/exit${c.reset} to quit.\n`);
+
+  if (aliases.length > 0) {
+    console.log(`${c.bright}Available commands:${c.reset} ${aliases.map(a => c.cyan + '/' + a + c.reset).join(', ')}\n`);
+  }
+
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    prompt: `${c.green}0n>${c.reset} `,
+    completer: (line) => {
+      const input = line.startsWith('/') ? line.slice(1) : line;
+      const hits = allCompletions.filter(c2 => c2.startsWith(input));
+      return [hits.map(h => '/' + h), line];
+    },
+  });
+
+  rl.prompt();
+
+  rl.on('line', async (line) => {
+    const input = line.trim();
+    if (!input) {
+      rl.prompt();
+      return;
+    }
+
+    // Strip leading / if present
+    const raw = input.startsWith('/') ? input.slice(1) : input;
+    const parts = raw.split(/\s+/);
+    const cmd = parts[0];
+    const cmdArgs = parts.slice(1);
+
+    if (cmd === 'exit' || cmd === 'quit') {
+      console.log(`\n${c.cyan}Goodbye!${c.reset}`);
+      rl.close();
+      process.exit(0);
+    }
+
+    if (cmd === 'help') {
+      console.log(`\n${c.bright}Shell Commands:${c.reset}`);
+      console.log(`  ${c.cyan}/commands${c.reset}   List all named RUNs`);
+      console.log(`  ${c.cyan}/list${c.reset}       Show connected services`);
+      console.log(`  ${c.cyan}/exit${c.reset}       Exit the shell`);
+      if (aliases.length > 0) {
+        console.log(`\n${c.bright}Named RUNs:${c.reset}`);
+        for (const a of aliases) {
+          const def = cmds.get(a);
+          console.log(`  ${c.cyan}/${a}${c.reset}  ${def.description || def.name || ''}`);
+        }
+      }
+      console.log('');
+      rl.prompt();
+      return;
+    }
+
+    if (cmd === 'commands') {
+      if (aliases.length === 0) {
+        console.log(`\n${c.yellow}No commands defined in SWITCH file.${c.reset}\n`);
+      } else {
+        console.log(`\n${c.bright}Named RUNs:${c.reset}`);
+        for (const a of aliases) {
+          const def = cmds.get(a);
+          console.log(`  ${c.cyan}/${a}${c.reset}  ${def.description || def.name || ''}`);
+        }
+        console.log('');
+      }
+      rl.prompt();
+      return;
+    }
+
+    if (cmd === 'list') {
+      const connectionsDir = path.join(DOT_ON_DIR, 'connections');
+      if (fs.existsSync(connectionsDir)) {
+        const files = fs.readdirSync(connectionsDir).filter(f => f.endsWith('.0n'));
+        console.log(`\n${c.bright}Connected Services:${c.reset}`);
+        for (const file of files) {
+          try {
+            const data = JSON.parse(fs.readFileSync(path.join(connectionsDir, file), 'utf8'));
+            console.log(`  ${c.green}●${c.reset} ${data.$0n?.name || data.service}`);
+          } catch {
+            console.log(`  ${c.red}●${c.reset} ${file} (error)`);
+          }
+        }
+        console.log('');
+      } else {
+        console.log(`\n${c.yellow}No connections found.${c.reset}\n`);
+      }
+      rl.prompt();
+      return;
+    }
+
+    // Try to run as a named command
+    if (cmds.has(cmd)) {
+      console.log('');
+      try {
+        await runCommand(cmd, cmds.get(cmd), cmdArgs);
+      } catch (err) {
+        console.log(`${c.red}Error: ${err.message}${c.reset}`);
+      }
+      console.log('');
+      rl.prompt();
+      return;
+    }
+
+    console.log(`${c.yellow}Unknown command: ${cmd}${c.reset}`);
+    console.log(`Type ${c.cyan}/help${c.reset} for available commands.`);
+    rl.prompt();
+  });
+
+  rl.on('close', () => {
+    process.exit(0);
+  });
 }
 
 main().catch(console.error);
